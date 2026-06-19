@@ -50,11 +50,13 @@
         }
     </script>
     <style>
-        /* Reset CSS Global untuk menghapus sisa margin/padding bawaan browser */
+        /* Mencegah scroll kanan miring yang merusak frame HP */
         html, body {
             margin: 0 !important;
             padding: 0 !important;
             box-sizing: border-box;
+            overflow-x: hidden !important;
+            width: 100%;
         }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -75,19 +77,19 @@
 </head>
 <body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col justify-between m-0 p-0">
 
-    <nav class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
+    <nav class="fixed top-0 left-0 right-0 w-full z-40 bg-white/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
         <div class="max-w-container-max mx-auto w-full px-margin-mobile md:px-gutter flex justify-between items-center">
             
             <div class="flex items-center gap-3">
                 <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-primary/20 flex-shrink-0">
-                <span class="font-h3 text-h3 font-bold text-primary">RS Medirossa Cikarang</span>
+                <span class="font-montserrat font-bold text-lg text-primary">RS Medirossa Cikarang</span>
             </div>
             
-            <div class="hidden md:flex items-center gap-stack-lg">
-                <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
-                <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" href="tentang.html">Profile</a>
+            <div class="hidden md:flex items-center gap-stack-lg text-sm font-semibold">
+                <a class="text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors" href="tentang.html">Profile</a>
                 <div class="relative group">
-                    <button class="flex items-center gap-1 font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors">
+                    <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
                         Layanan & Fasilitas <span class="material-symbols-outlined">expand_more</span>
                     </button>
                     <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 border border-outline-variant/30">
@@ -102,57 +104,118 @@
                     </button>
                     <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 border border-outline-variant/30 text-sm font-semibold">
                         <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="jadwaldokter.html">Jadwal Dokter</a>
-                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="alurpelayan.html">Alur Pelayanan</a>
+                        <a class="text-primary border-b-2 border-primary pb-1" href="alurpelayan.html">Alur Pelayanan</a>
                         <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="kunjunganpasien.html">Data Kunjungan</a>
                         <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="datapenyakit.html">Data Penyakit</a>
                     </div>
                 </div>
-                <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" href="artikel.html">Articles</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors" href="artikel.html">Articles</a>
             </div>
+
             <div class="flex items-center gap-4">
-               <a class="hidden md:flex items-center gap-2 bg-[#006d37] text-white px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90 cursor-pointer" 
-   href="daftar.html">
-    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
-    DAFTAR BEROBAT ONLINE
-</a>
-                <button class="md:hidden text-primary">
+                <a class="hidden md:flex items-center gap-2 bg-secondary text-on-secondary px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90 text-xs font-bold" href="daftar.html">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+                    DAFTAR BEROBAT ONLINE
+                </a>
+                <button id="menu-btn" class="md:hidden text-primary focus:outline-none">
                     <span class="material-symbols-outlined text-3xl">menu</span>
                 </button>
             </div>
         </div>
     </nav>
 
-<header class="relative h-[35vh] w-full pt-20 flex items-center justify-center text-center overflow-hidden">
+    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
+
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[280px] bg-white z-50 shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out md:hidden font-inter">
+        
+        <div class="flex flex-col space-y-6 overflow-y-auto max-h-[85vh] pr-1">
+            <div class="flex justify-between items-center pb-4 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                    <img src="asset/logo.jpg" alt="Logo" class="w-8 h-8 rounded-full">
+                    <span class="font-montserrat font-bold text-sm text-primary">Menu Utama</span>
+                </div>
+                <button id="close-btn" class="text-gray-400 hover:text-error focus:outline-none">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-gray-700">
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="index.html">
+                    <span class="material-symbols-outlined text-lg">home</span> Home
+                </a>
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="tentang.html">
+                    <span class="material-symbols-outlined text-lg">person</span> Profile
+                </a>
+
+                <div class="flex flex-col">
+                    <button onclick="toggleAccordion('mobile-layanan', 'icon-layanan')" class="w-full py-2.5 px-3 hover:bg-gray-50 rounded-xl flex justify-between items-center text-left focus:outline-none">
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">medical_services</span> Layanan & Fasilitas</span>
+                        <span id="icon-layanan" class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
+                    </button>
+                    <div id="mobile-layanan" class="hidden flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50 rounded-xl mt-1">
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="rawatjalan.html">Rawat Jalan</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="rawatinap.html">Rawat Inap</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="penunjangmedis.html">Penunjang Medis</a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <button onclick="toggleAccordion('mobile-info', 'icon-informasi')" class="w-full py-2.5 px-3 bg-gray-50 rounded-xl flex justify-between items-center text-left focus:outline-none text-primary">
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">info</span> Informasi</span>
+                        <span id="icon-informasi" class="material-symbols-outlined text-lg transition-transform duration-200 rotate-180">expand_more</span>
+                    </button>
+                    <div id="mobile-info" class="flex flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50 rounded-xl mt-1">
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="jadwaldokter.html">Jadwal Dokter</a>
+                        <a class="block py-2 text-xs text-primary font-bold" href="alurpelayan.html">Alur Pelayanan</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="kunjunganpasien.html">Data Kunjungan</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="datapenyakit.html">Data Penyakit</a>
+                    </div>
+                </div>
+
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="artikel.html">
+                    <span class="material-symbols-outlined text-lg">article</span> Articles
+                </a>
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100">
+            <a class="block bg-secondary text-white py-3 rounded-full text-center text-xs font-bold shadow-md" href="daftar.html">
+                DAFTAR BEROBAT ONLINE
+            </a>
+        </div>
+    </div>
+
+    <header class="relative h-[35vh] w-full pt-20 flex items-center justify-center text-center overflow-hidden">
         <div class="absolute inset-0 z-0">
             <div class="absolute inset-0 hero-gradient z-10"></div>
-            <img class="w-full h-full object-cover blur-[1px]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjROQ18c0n0a4c0fiisituRpjenbo_gs9wmj54ugydZGrvBtitW24_dqQWBXeX1r0YlaV20smN-g1yMo5soZNbBlxyJhJmkDf_6odPiSW57krWvxGGvpo4Jg7Isg9KAgvRXZ_-RkPnJCRgKvDhHpGjnPRtOM4iqgTQMEVXnxundOgxpPb0sVfSrKjMG0_unwPWAOZBN1QnYW3sVjjDHl7nbAZiOm8Uzd23G2gmMkRPn8g0OoAlxfS3nN4XvLvaw3bUBnn9HHoCGbQ" alt="Hospital Unit">
+            <img class="w-full h-full object-cover blur-[1px]" src="asset/rs.png" alt="Hospital Unit">
         </div>
         <div class="relative z-20 max-w-4xl mx-auto px-4 text-white">
             <h1 class="font-h1-desktop text-3xl md:text-5xl font-bold mb-3">Alur Pelayanan Kami</h1>
-            <p class="text-sm md:text-xl opacity-90 max-w-2xl mx-auto">Panduan langkah demi langkah proses pelayanan kesehatan di RS Medirossa Cikarang demi kenyamanan dan efisiensi penanganan Anda.</p>
+            <p class="text-xs md:text-base opacity-90 max-w-2xl mx-auto font-medium">Panduan langkah demi langkah proses pelayanan kesehatan di RS Medirossa Cikarang demi kenyamanan dan efisiensi penanganan Anda.</p>
         </div>
     </header>
 
-    <div class="bg-white border-b border-outline-variant sticky top-20 z-40 shadow-sm">
+    <div class="bg-white border-b border-outline-variant sticky top-20 z-30 shadow-sm max-w-full overflow-hidden">
         <div class="max-w-6xl mx-auto px-4">
-            <div class="flex overflow-x-auto whitespace-nowrap">
-                <button onclick="switchTab('pendaftaran-rawat-jalan')" id="btn-pendaftaran-rawat-jalan" class="flex-1 min-w-[180px] text-center py-4 px-4 font-semibold text-sm border-r border-outline-variant border-b-4 border-primary text-primary bg-white">
+            <div class="flex overflow-x-auto whitespace-nowrap scrollbar-hide" style="-webkit-overflow-scrolling: touch;">
+                <button onclick="switchTab('pendaftaran-rawat-jalan')" id="btn-pendaftaran-rawat-jalan" class="flex-1 min-w-[180px] text-center py-4 px-4 font-bold text-xs md:text-sm border-b-4 border-primary text-primary bg-white">
                     Pendaftaran Rawat Jalan
                 </button>
-                <button onclick="switchTab('layanan-rawat-jalan')" id="btn-layanan-rawat-jalan" class="flex-1 min-w-[180px] text-center py-4 px-4 font-semibold text-sm border-r border-outline-variant border-b-4 border-transparent text-on-surface-variant hover:text-primary">
+                <button onclick="switchTab('layanan-rawat-jalan')" id="btn-layanan-rawat-jalan" class="flex-1 min-w-[180px] text-center py-4 px-4 font-semibold text-xs md:text-sm border-b-4 border-transparent text-on-surface-variant hover:text-primary">
                     Layanan Rawat Jalan
                 </button>
-                <button onclick="switchTab('gawat-darurat')" id="btn-gawat-darurat" class="flex-1 min-w-[220px] text-center py-4 px-4 font-semibold text-sm border-r border-outline-variant border-b-4 border-transparent text-on-surface-variant hover:text-primary">
+                <button onclick="switchTab('gawat-darurat')" id="btn-gawat-darurat" class="flex-1 min-w-[220px] text-center py-4 px-4 font-semibold text-xs md:text-sm border-b-4 border-transparent text-on-surface-variant hover:text-primary">
                     Gawat Darurat (Umum & Asuransi)
                 </button>
-                <button onclick="switchTab('pendaftaran-rawat-inap')" id="btn-pendaftaran-rawat-inap" class="flex-1 min-w-[180px] text-center py-4 px-4 font-semibold text-sm border-b-4 border-transparent text-on-surface-variant hover:text-primary">
+                <button onclick="switchTab('pendaftaran-rawat-inap')" id="btn-pendaftaran-rawat-inap" class="flex-1 min-w-[180px] text-center py-4 px-4 font-semibold text-xs md:text-sm border-b-4 border-transparent text-on-surface-variant hover:text-primary">
                     Pendaftaran Rawat Inap
                 </button>
             </div>
         </div>
     </div>
 
-    <main class="max-w-4xl mx-auto w-full px-4 py-12 flex-grow">
+    <main class="max-w-4xl mx-auto w-full px-4 py-12 flex-grow max-w-full overflow-hidden">
 
         <section id="pendaftaran-rawat-jalan" class="tab-content space-y-8">
             <div class="text-center space-y-1">
@@ -160,8 +223,8 @@
                 <h2 class="font-montserrat text-xl md:text-2xl font-bold text-on-surface">Panduan langkah demi langkah proses registrasi di RS Medirossa Cikarang</h2>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center">
-                <div class="border border-gray-200 p-4 rounded-lg text-center w-64 bg-white">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col items-center max-w-full overflow-hidden">
+                <div class="border border-gray-200 p-4 rounded-lg text-center w-64 bg-white shadow-sm">
                     <span class="material-symbols-outlined text-primary text-2xl mb-1">location_on</span>
                     <p class="text-xs font-bold text-gray-400 uppercase tracking-wider">TAHAP 1</p>
                     <p class="text-sm font-bold text-gray-700">Pasien Datang</p>
@@ -169,13 +232,13 @@
                 </div>
                 <div class="flex flex-col items-center py-2"><span class="material-symbols-outlined text-gray-300">arrow_downward</span></div>
 
-                <div class="border border-gray-200 p-4 rounded-lg text-center w-64 bg-white">
+                <div class="border border-gray-200 p-4 rounded-lg text-center w-64 bg-white shadow-sm">
                     <span class="material-symbols-outlined text-primary text-2xl mb-1">hourglass_top</span>
                     <p class="text-sm font-semibold text-gray-700">Menunggu Panggilan Nomor Antrean</p>
                 </div>
                 <div class="flex flex-col items-center py-2"><span class="material-symbols-outlined text-gray-300">arrow_downward</span></div>
 
-                <div class="border border-gray-200 p-4 rounded-lg text-center w-64 bg-white">
+                <div class="border border-gray-200 p-4 rounded-lg text-center w-64 bg-white shadow-sm">
                     <span class="material-symbols-outlined text-primary text-2xl mb-1">fact_check</span>
                     <p class="text-sm font-semibold text-gray-700">Verifikasi Kepesertaan & Syarat Pendaftaran</p>
                 </div>
@@ -185,33 +248,33 @@
                     <div class="decision-diamond bg-primary text-white flex items-center justify-center shadow-sm">
                         <div class="diamond-text text-[10px] font-bold text-center leading-tight tracking-wider">DECISION<br>SYARAT<br>LENGKAP?</div>
                     </div>
-                    <div class="absolute right-[130px] flex items-center">
-                        <div class="border-t border-dashed border-red-400 w-12"></div>
-                        <div class="border border-red-200 bg-red-50 p-3 rounded text-left w-48 text-xs">
-                            <p class="font-bold text-red-600">TIDAK (NO)</p>
+                    <div class="absolute left-36 md:left-40 flex items-center">
+                        <span class="material-symbols-outlined text-gray-300">arrow_forward</span>
+                        <div class="border border-red-200 bg-red-50 p-2.5 rounded-xl text-left w-36 md:w-48 text-[11px] ml-1 shadow-sm font-medium">
+                            <p class="font-bold text-red-600 text-xs">TIDAK (NO)</p>
                             <p class="text-gray-600 mt-0.5 leading-normal">Melengkapi Persyaratan Pendaftaran / Menjadi Pasien Umum.</p>
                         </div>
                     </div>
                 </div>
 
-                <p class="text-xs font-bold text-primary mb-4">YA</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 w-full max-w-2xl mt-2">
-                    <div class="flex flex-col items-center">
+                <p class="text-xs font-bold text-primary mb-4 mt-2">YA</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl mt-2">
+                    <div class="flex flex-col items-center bg-gray-50/50 p-4 rounded-xl border border-gray-100 shadow-sm">
                         <p class="text-xs font-bold text-emerald-600 mb-2 tracking-widest uppercase">BPJS TRACK</p>
                         <div class="bg-primary text-white p-3 rounded-lg text-center text-xs font-semibold w-full shadow-sm">Registrasi / Pendaftaran</div>
-                        <div class="h-8 w-px bg-gray-300 my-1"></div>
+                        <div class="h-6 w-px bg-gray-300 my-1"></div>
                         <div class="bg-primary text-white p-3 rounded-lg text-center text-xs font-semibold w-full shadow-sm">Diterbitkan SEP</div>
                     </div>
-                    <div class="flex flex-col items-center">
+                    <div class="flex flex-col items-center bg-gray-50/50 p-4 rounded-xl border border-gray-100 shadow-sm">
                         <p class="text-xs font-bold text-blue-500 mb-2 tracking-widest uppercase">UMUM TRACK</p>
                         <div class="bg-medical-blue text-white p-3 rounded-lg text-center text-xs font-semibold w-full shadow-sm">Verifikasi Syarat Pasien Umum</div>
-                        <div class="h-4 w-px bg-gray-300 my-1"></div>
+                        <div class="h-6 w-px bg-gray-300 my-1"></div>
                         <div class="bg-medical-blue text-white p-3 rounded-lg text-center text-xs font-semibold w-full shadow-sm">Registrasi / Pendaftaran</div>
                     </div>
                 </div>
 
                 <div class="h-8 w-px bg-gray-300 my-3"></div>
-                <div class="border border-primary bg-emerald-50 text-primary px-6 py-3 rounded-full font-bold text-xs flex items-center gap-2">
+                <div class="border border-primary bg-emerald-50 text-primary px-6 py-3 rounded-full font-bold text-xs flex items-center gap-2 shadow-sm">
                     <span class="material-symbols-outlined text-sm">check_circle</span> Pendaftaran Selesai
                 </div>
             </div>
@@ -225,59 +288,59 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
-                <div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm">
+                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                     <div class="flex items-center space-x-2 mb-2">
                         <div class="w-2 h-2 rounded-full bg-primary"></div>
                         <h5 class="font-label-bold text-xs text-primary uppercase font-bold">Syarat BPJS</h5>
                     </div>
-                    <ul class="text-xs space-y-1 text-on-surface-variant">
+                    <ul class="text-xs space-y-1 text-on-surface-variant font-medium">
                         <li>• 3 Lembar FC Kartu BPJS</li>
                         <li>• 3 Lembar FC KTP & FC KK</li>
                     </ul>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm">
+                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                     <div class="flex items-center space-x-2 mb-2">
                         <div class="w-2 h-2 rounded-full bg-medical-blue"></div>
                         <h5 class="font-label-bold text-xs text-medical-blue uppercase font-bold">Syarat UMUM</h5>
                     </div>
-                    <ul class="text-xs space-y-1 text-on-surface-variant">
+                    <ul class="text-xs space-y-1 text-on-surface-variant font-medium">
                         <li>• KTP Asli / Fotokopi</li>
                     </ul>
                 </div>
-                <div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm">
+                <div class="bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
                     <div class="flex items-center space-x-2 mb-2">
                         <div class="w-2 h-2 rounded-full bg-primary"></div>
                         <h5 class="font-label-bold text-xs text-primary uppercase font-bold">Syarat ASURANSI</h5>
                     </div>
-                    <ul class="text-xs space-y-1 text-on-surface-variant">
+                    <ul class="text-xs space-y-1 text-on-surface-variant font-medium">
                         <li>• Kartu Asuransi Aktif & KTP Pasien</li>
                     </ul>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 max-w-5xl mx-auto items-start">
-                <div class="lg:col-span-1 bg-slate-50 border border-slate-200 p-4 rounded-xl shadow-sm space-y-3 sticky top-24">
+                <div class="lg:col-span-1 bg-slate-50 border border-slate-200 p-4 rounded-xl shadow-sm space-y-3">
                     <h4 class="font-label-bold text-xs text-primary flex items-center gap-1 font-bold uppercase tracking-wider">
                         <span class="material-symbols-outlined text-sm">info</span> Layanan Penunjang
                     </h4>
-                    <ul class="text-xs space-y-2 text-slate-600 font-medium">
+                    <ul class="text-xs space-y-2 text-slate-600 font-semibold">
                         <li class="flex items-center gap-1.5"><span class="w-1 h-1 bg-primary rounded-full"></span> Laboratorium</li>
                         <li class="flex items-center gap-1.5"><span class="w-1 h-1 bg-primary rounded-full"></span> Radiologi (Rontgen, CT)</li>
                         <li class="flex items-center gap-1.5"><span class="w-1 h-1 bg-primary rounded-full"></span> EKG & EEG</li>
-                        <li class="flex items-center gap-1.5"><span class="w-1 h-1 bg-primary rounded-full"></span> USG 4D / Perawatan Luka</li>
+                        <li class="flex items-center gap-1.5"><span class="w-1 h-1 bg-primary rounded-full"></span> USG 4D / Perawatan Wound</li>
                     </ul>
                 </div>
 
-                <div class="lg:col-span-3 bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col items-center">
+                <div class="lg:col-span-3 bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex flex-col items-center">
                     <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
                         <div class="border border-gray-200 p-4 rounded-xl text-center bg-white shadow-sm w-full max-w-[240px]">
                             <p class="text-xs font-bold text-slate-900">1. Pasien Datang</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Ambil nomor antrean di mesin lobi utama.</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5 font-medium">Ambil nomor antrean di mesin lobi utama.</p>
                         </div>
                         <span class="material-symbols-outlined text-primary rotate-90 sm:rotate-0">arrow_forward</span>
                         <div class="border border-gray-200 p-4 rounded-xl text-center bg-white shadow-sm w-full max-w-[240px]">
                             <p class="text-xs font-bold text-slate-900">2. Menunggu Panggilan</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Menunggu nomor dipanggil petugas admisi.</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5 font-medium">Menunggu nomor dipanggil petugas admisi.</p>
                         </div>
                     </div>
                     <div class="py-2"><span class="material-symbols-outlined text-gray-300">arrow_downward</span></div>
@@ -285,12 +348,12 @@
                     <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
                         <div class="border border-gray-200 p-4 rounded-xl text-center bg-white shadow-sm w-full max-w-[240px]">
                             <p class="text-xs font-bold text-slate-900">3. Verifikasi Syarat</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Validasi BPJS/Asuransi & berkas.</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5 font-medium">Validasi BPJS/Asuransi & berkas.</p>
                         </div>
                         <span class="material-symbols-outlined text-primary rotate-90 sm:rotate-0">arrow_forward</span>
                         <div class="border border-gray-200 p-4 rounded-xl text-center bg-white shadow-sm w-full max-w-[240px]">
                             <p class="text-xs font-bold text-slate-900">4. Registrasi</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Input data ke sistem rekam medis RS.</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5 font-medium">Input data ke sistem rekam medis RS.</p>
                         </div>
                     </div>
                     <div class="py-2"><span class="material-symbols-outlined text-gray-300">arrow_downward</span></div>
@@ -298,21 +361,21 @@
                     <div class="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
                         <div class="bg-primary/10 border border-primary/20 rounded-xl p-4 text-center shadow-sm w-full max-w-[240px]">
                             <p class="text-xs font-bold text-primary">5. Pendaftaran Selesai</p>
-                            <p class="text-[10px] text-primary/80 mt-0.5">Terima kartu berobat & struk poli.</p>
+                            <p class="text-[10px] text-primary/80 mt-0.5 font-medium">Terima kartu berobat & struk poli.</p>
                         </div>
                         <span class="material-symbols-outlined text-primary rotate-90 sm:rotate-0">arrow_forward</span>
                         <div class="border border-gray-200 p-4 rounded-xl text-center bg-white shadow-sm w-full max-w-[240px]">
                             <p class="text-xs font-bold text-slate-900">6. Menunggu Poli</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Menunggu di ruang tunggu dokter spesialis.</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5 font-medium">Menunggu di ruang tunggu dokter spesialis.</p>
                         </div>
                     </div>
                     <div class="py-4"><span class="material-symbols-outlined text-primary">arrow_downward</span></div>
 
                     <div class="border-2 border-primary bg-white p-5 rounded-xl w-full max-w-sm shadow-md text-center relative">
-                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white px-3 py-0.5 rounded-full text-[9px] font-bold uppercase">Langkah Utama</div>
+                        <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white px-3 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider">Langkah Utama</div>
                         <span class="material-symbols-outlined text-primary text-2xl mb-1">stethoscope</span>
                         <h3 class="font-bold text-sm text-slate-900">7. Pemeriksaan Dokter</h3>
-                        <p class="text-xs text-slate-600 mt-0.5">Konsultasi medis dan tindakan oleh Dokter Spesialis.</p>
+                        <p class="text-xs text-slate-600 mt-0.5 font-medium">Konsultasi medis dan tindakan oleh Dokter Spesialis.</p>
                     </div>
                     <div class="py-4"><span class="material-symbols-outlined text-primary">arrow_downward</span></div>
 
@@ -320,7 +383,7 @@
                         <div class="decision-diamond border-2 border-primary bg-slate-50 flex items-center justify-center text-center p-4 shadow-sm">
                             <p class="diamond-text font-bold text-primary text-[10px] leading-tight">8. PERLU PEMERIKSAAN PENUNJANG?</p>
                         </div>
-                        <div class="absolute left-[140px] top-1/2 -translate-y-1/2 flex items-center">
+                        <div class="absolute left-32 top-1/2 -translate-y-1/2 flex items-center">
                             <span class="material-symbols-outlined text-primary">arrow_forward</span>
                             <span class="ml-1 font-bold text-primary text-xs uppercase">Ya</span>
                         </div>
@@ -329,26 +392,26 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-xl pt-4">
                         <div class="border border-outline-variant rounded-xl p-4 bg-white shadow-sm text-center">
                             <p class="text-xs font-bold text-slate-900">9. Penunjang Medis</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Laboratorium, Radiologi, EKG, dll.</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5 font-medium">Laboratorium, Radiologi, EKG, dll.</p>
                         </div>
                         <div class="border border-outline-variant rounded-xl p-4 bg-white shadow-sm text-center">
                             <p class="text-xs font-bold text-slate-900">12. Farmasi & Apotek</p>
-                            <p class="text-[10px] text-slate-500 mt-0.5">Penyiapan obat dan edukasi oleh apoteker.</p>
+                            <p class="text-[10px] text-slate-500 mt-0.5 font-medium">Penyiapan obat dan edukasi oleh apoteker.</p>
                         </div>
                     </div>
                     <div class="py-3"><span class="material-symbols-outlined text-primary">arrow_downward</span></div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-md mb-6">
-                        <div class="border border-outline-variant p-3 rounded-xl bg-slate-50 text-center text-xs">
-                            <p class="font-bold text-slate-700">13. Verifikasi Obat</p>
+                        <div class="border border-outline-variant p-3 rounded-xl bg-slate-50 text-center text-xs font-bold text-gray-700 shadow-sm">
+                            13. Verifikasi Obat
                         </div>
-                        <div class="border border-outline-variant p-3 rounded-xl bg-slate-50 text-center text-xs">
-                            <p class="font-bold text-slate-700">14. Kasir (Pasien Umum)</p>
+                        <div class="border border-outline-variant p-3 rounded-xl bg-slate-50 text-center text-xs font-bold text-gray-700 shadow-sm">
+                            14. Kasir (Pasien Umum)
                         </div>
                     </div>
 
                     <div class="bg-primary text-white text-center py-3 px-10 rounded-full font-bold text-xs shadow-md">
-                        15. Pulang / Selesai
+                        15. Pulang / Selesai Pelayanan
                     </div>
                 </div>
             </div>
@@ -360,76 +423,76 @@
                 <p class="text-xs font-semibold text-gray-400">Panduan langkah-langkah proses administrasi di Instalasi Gawat Darurat (IGD) RS Medirossa Cikarang</p>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mb-8 text-xs">
-                    <div class="bg-gray-50 p-3 rounded border border-gray-200">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 flex flex-col items-center">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full mb-8 text-xs font-semibold">
+                    <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm">
                         <p class="font-bold text-emerald-700">■ SYARAT BPJS</p>
                         <p class="text-gray-500 mt-1 leading-relaxed">• 3 Lembar FC Kartu BPJS<br>• 3 Lembar FC KTP & KK</p>
                     </div>
-                    <div class="bg-gray-50 p-3 rounded border border-gray-200">
+                    <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm">
                         <p class="font-bold text-blue-600">■ SYARAT UMUM</p>
                         <p class="text-gray-500 mt-1 leading-relaxed">• KTP Asli / KTP Wali</p>
                     </div>
-                    <div class="bg-gray-50 p-3 rounded border border-gray-200">
+                    <div class="bg-gray-50 p-3 rounded border border-gray-200 shadow-sm">
                         <p class="font-bold text-amber-600">■ SYARAT ASURANSI</p>
                         <p class="text-gray-500 mt-1 leading-relaxed">• Kartu Asuransi / MIOP & KTP</p>
                     </div>
                 </div>
 
-                <div class="flex items-center gap-4 bg-white p-4 w-full max-w-md justify-center border border-gray-100 rounded-xl mb-4">
+                <div class="flex items-center gap-4 bg-white p-4 w-full max-w-md justify-center border border-gray-100 rounded-xl mb-4 shadow-sm">
                     <div class="bg-emergency-red text-white py-2 px-6 rounded font-bold text-xs shadow-sm">Pasien Datang</div>
                     <span class="material-symbols-outlined text-gray-300">arrow_forward</span>
-                    <div class="bg-white border border-emergency-red text-emergency-red py-2 px-6 rounded font-bold text-xs">IGD</div>
+                    <div class="bg-white border border-emergency-red text-emergency-red py-2 px-6 rounded font-bold text-xs shadow-sm">IGD</div>
                 </div>
 
                 <div class="relative flex justify-center items-center my-4">
                     <div class="decision-diamond border-2 border-emergency-red bg-brand-red-light text-emergency-red flex items-center justify-center shadow-sm">
                         <div class="diamond-text text-[10px] font-bold text-center leading-tight">Triage Kriteria<br>Emergency?</div>
                     </div>
-                    <div class="absolute left-[130px] flex items-center w-60">
+                    <div class="absolute left-36 md:left-40 flex items-center w-60">
                         <span class="material-symbols-outlined text-gray-300">arrow_forward</span>
-                        <div class="bg-white border border-gray-200 p-2 rounded text-[10px] shadow-sm ml-1">
+                        <div class="bg-white border border-gray-200 p-2 rounded-xl text-[10px] shadow-md ml-1 font-medium">
                             <p class="font-bold text-gray-700">TIDAK (Non-Emergency)</p>
-                            <p class="text-gray-500">Menjadi pasien umum.</p>
+                            <p class="text-gray-500 mt-0.5">Menjadi pasien umum.</p>
                         </div>
                     </div>
                 </div>
-                <div class="py-2 text-primary font-bold text-xs">YA</div>
+                <div class="py-2 text-primary font-bold text-xs mt-2">YA</div>
 
-                <div class="bg-primary text-white py-3 px-6 rounded-xl text-center w-full max-w-md shadow-sm font-semibold text-xs mb-6">
+                <div class="bg-primary text-white py-3 px-6 rounded-xl text-center w-full max-w-md shadow-sm font-bold text-xs mb-6">
                     Keluarga Pasien Melakukan Pendaftaran <br>
                     <span class="text-[10px] opacity-80 font-normal">(Menuju Loket Administrasi IGD)</span>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl mb-6">
-                    <div class="bg-white border-l-4 border-medical-blue p-4 rounded-xl shadow-sm">
+                    <div class="bg-white border-l-4 border-medical-blue p-4 rounded-xl shadow-sm border border-gray-100">
                         <p class="text-xs font-bold text-medical-blue uppercase mb-1">Pasien Umum</p>
-                        <p class="text-xs font-semibold">Menyerahkan Kartu Tanda Penduduk (KTP) Pasien</p>
+                        <p class="text-xs font-medium text-gray-600">Menyerahkan Kartu Tanda Penduduk (KTP) Pasien</p>
                     </div>
-                    <div class="bg-white border-l-4 border-primary p-4 rounded-xl shadow-sm space-y-2">
+                    <div class="bg-white border-l-4 border-primary p-4 rounded-xl shadow-sm border border-gray-100 space-y-2">
                         <p class="text-xs font-bold text-primary uppercase mb-1">Pasien Asuransi</p>
-                        <p class="text-xs font-semibold">Menyerahkan KTP & Kartu Asuransi Kesehatan</p>
-                        <div class="bg-slate-50 p-1.5 rounded flex items-center gap-1 text-[11px] font-medium text-gray-700">
-                            <span class="material-symbols-outlined text-primary text-sm">check_circle</span> Verifikasi Kepesertaan Asuransi
+                        <p class="text-xs font-medium text-gray-600">Menyerahkan KTP & Kartu Asuransi Kesehatan</p>
+                        <div class="bg-slate-50 p-1.5 rounded-lg flex items-center gap-1 text-[11px] font-bold text-primary border border-emerald-100">
+                            <span class="material-symbols-outlined text-sm">check_circle</span> Verifikasi Kepesertaan Asuransi
                         </div>
                     </div>
                 </div>
 
-                <div class="w-28 h-28 rounded-full border-2 border-primary bg-white flex flex-col items-center justify-center text-center shadow-md mb-6">
+                <div class="w-24 h-24 rounded-full border-2 border-primary bg-white flex flex-col items-center justify-center text-center shadow-md mb-6">
                     <span class="material-symbols-outlined text-xl text-primary">app_registration</span>
-                    <p class="text-[11px] font-bold text-gray-700 mt-1">Registrasi /<br>Pendaftaran</p>
+                    <p class="text-[10px] font-bold text-gray-700 mt-1 leading-tight">Registrasi /<br>Pendaftaran</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-xl mb-6">
-                    <div class="bg-slate-50 border border-gray-200 p-3 rounded-xl text-center text-xs">
-                        <p class="font-bold text-medical-blue">Melakukan Pembayaran di Kasir</p>
+                    <div class="bg-slate-50 border border-gray-200 p-3 rounded-xl text-center text-xs font-bold text-medical-blue shadow-sm">
+                        Melakukan Pembayaran di Kasir
                     </div>
-                    <div class="bg-slate-50 border border-gray-200 p-3 rounded-xl text-center text-xs">
-                        <p class="font-bold text-primary">Diterbitkan SEP Asuransi/BPJS</p>
+                    <div class="bg-slate-50 border border-gray-200 p-3 rounded-xl text-center text-xs font-bold text-primary shadow-sm">
+                        Diterbitkan SEP Asuransi/BPJS
                     </div>
                 </div>
 
-                <div class="bg-emerald-600 text-white py-3 px-10 rounded-full font-bold text-xs shadow-sm">
+                <div class="bg-emerald-600 text-white py-3 px-10 rounded-full font-bold text-xs shadow-md">
                     ✔ Pendaftaran Selesai
                 </div>
             </div>
@@ -443,25 +506,25 @@
 
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center">
                 <div class="border border-gray-200 p-4 rounded-xl text-center w-72 bg-white shadow-sm">
-                    <p class="text-[9px] font-bold text-emergency-red bg-red-50 px-2 py-0.5 rounded inline-block uppercase mb-1">Langkah 01</p>
+                    <p class="text-[9px] font-bold text-emergency-red bg-red-50 px-2 py-0.5 rounded inline-block uppercase mb-1 tracking-wider">Langkah 01</p>
                     <p class="text-xs font-bold text-gray-700">Pasien Datang Dari Poliklinik / IGD</p>
                 </div>
                 <div class="py-2"><span class="material-symbols-outlined text-gray-300">arrow_downward</span></div>
 
                 <div class="decision-diamond bg-primary text-white flex items-center justify-center shadow-md my-2">
-                    <div class="diamond-text text-[10px] font-bold text-center leading-tight">KONFIRMASI<br>KAMAR<br>KOSONG?</div>
+                    <div class="diamond-text text-[10px] font-bold text-center leading-tight tracking-wider">KONFIRMASI<br>KAMAR<br>KOSONG?</div>
                 </div>
                 <div class="py-2"><span class="material-symbols-outlined text-primary">arrow_downward</span></div>
 
                 <div class="border border-gray-200 p-4 rounded-xl text-center w-72 bg-white shadow-sm">
-                    <p class="text-[9px] font-bold text-emergency-red bg-red-50 px-2 py-0.5 rounded inline-block uppercase mb-1">Langkah 02</p>
+                    <p class="text-[9px] font-bold text-emergency-red bg-red-50 px-2 py-0.5 rounded inline-block uppercase mb-1 tracking-wider">Langkah 02</p>
                     <p class="text-xs font-bold text-gray-700">Keluarga Pasien Melakukan Pendaftaran</p>
                 </div>
                 <div class="py-2"><span class="material-symbols-outlined text-gray-300">arrow_downward</span></div>
 
                 <div class="border-2 border-emerald-500 bg-emerald-50/20 p-4 rounded-xl text-center w-72 shadow-sm">
                     <p class="text-xs font-bold text-emerald-800 uppercase tracking-wide">✔ FINALISASI REGISTRASI</p>
-                    <p class="text-[11px] text-gray-500 mt-1">Penerbitan berkas SPRI / Penyelesaian Deposit Kasir.</p>
+                    <p class="text-[11px] text-gray-500 mt-1 font-medium leading-normal">Penerbitan berkas SPRI / Penyelesaian Deposit Kasir.</p>
                 </div>
                 <div class="py-3"><span class="material-symbols-outlined text-gray-300">arrow_downward</span></div>
 
@@ -473,9 +536,8 @@
 
     </main>
 
-    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
-            
+    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter overflow-hidden">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg w-full">
             <div class="md:col-span-1 space-y-4">
                 <div class="flex items-center gap-3">
                     <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-white/20 flex-shrink-0">
@@ -483,16 +545,14 @@
                 </div>
                 <p class="text-xs text-gray-400 opacity-90 leading-relaxed">Bagian dari Medirossa Hospital Group, berkomitmen untuk memberikan layanan kesehatan berkualitas tinggi bagi masyarakat Indonesia.</p>
             </div>
-            
             <div>
                 <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Rumah Sakit</h4>
                 <ul class="space-y-3 text-xs font-medium">
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Tentang Kami</a></li>
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Visi & Misi</a></li>
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">artikel</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Visi & Misi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">Articles</a></li>
                 </ul>
             </div>
-            
             <div>
                 <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Pasien & Pengunjung</h4>
                 <ul class="space-y-3 text-xs font-medium">
@@ -502,7 +562,6 @@
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kontak IGD</a></li>
                 </ul>
             </div>
-            
             <div>
                 <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Hubungi Kami</h4>
                 <div class="space-y-3 text-xs font-medium text-gray-300">
@@ -518,37 +577,89 @@
                 </div>
             </div>
         </div>
-        
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-gray-500 font-medium">
             <p>© 2024 RS Medirossa Cikarang. Member of Medirossa Hospital Group. Licensed Healthcare Provider.</p>
         </div>
     </footer>
 
-    <a class="md:hidden fixed bottom-6 right-6 w-16 h-16 bg-error text-white rounded-full shadow-2xl flex items-center justify-center z-[100] animate-bounce" href="tel:082261107834">
-        <span class="material-symbols-outlined text-3xl">call</span>
+    <a class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-error text-white rounded-full shadow-2xl flex items-center justify-center z-[100] animate-bounce" href="tel:082261107834">
+        <span class="material-symbols-outlined text-2xl">call</span>
     </a>
 
     <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        // Fungsi Membuka Sidebar (Meluncur Halus dari Samping Kanan)
+        if (menuBtn && mobileMenu && overlay) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; 
+            });
+        }
+
+        // Fungsi Menutup Sidebar (Geser Kembali ke Luar Kanan Screen)
+        function closeSidebar() {
+            mobileMenu.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = ''; 
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+        if (overlay) overlay.addEventListener('click', closeSidebar);
+
+        // Fungsi Buka-Tutup Submenu Cabang (Accordion)
+        function toggleAccordion(panelId, iconId) {
+            const panel = document.getElementById(panelId);
+            const icon = document.getElementById(iconId);
+            
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                panel.classList.add('flex');
+                if(icon) icon.classList.add('rotate-180');
+            } else {
+                panel.classList.remove('flex');
+                panel.classList.add('hidden');
+                if(icon) icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Tab Content Switcher Logic
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.add('hidden');
             });
             document.getElementById(tabId).classList.remove('hidden');
 
-            const buttons = document.querySelectorAll('main button, .sticky button');
+            const buttons = document.querySelectorAll('.sticky button');
             buttons.forEach(btn => {
                 if(btn.id && btn.id.startsWith('btn-')) {
-                    btn.classList.remove('border-primary', 'text-primary', 'bg-white');
-                    btn.classList.add('border-transparent', 'text-on-surface-variant');
+                    btn.classList.remove('border-primary', 'text-primary', 'bg-white', 'font-bold');
+                    btn.classList.add('border-transparent', 'text-on-surface-variant', 'font-semibold');
                 }
             });
 
             const activeBtn = document.getElementById('btn-' + tabId);
             if (activeBtn) {
-                activeBtn.classList.remove('border-transparent', 'text-on-surface-variant');
-                activeBtn.classList.add('border-primary', 'text-primary', 'bg-white');
+                activeBtn.classList.remove('border-transparent', 'text-on-surface-variant', 'font-semibold');
+                activeBtn.classList.add('border-primary', 'text-primary', 'bg-white', 'font-bold');
             }
         }
+
+        // Sticky Compression Navigation Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (nav && window.scrollY > 50) {
+                nav.classList.add('shadow-md', 'h-16');
+                nav.classList.remove('h-20');
+            } else if (nav) {
+                nav.classList.remove('shadow-md', 'h-16');
+                nav.classList.add('h-20');
+            }
+        });
     </script>
 </body>
 </html>
