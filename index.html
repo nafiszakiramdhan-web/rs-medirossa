@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html class="light" lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>RS Medirossa Cikarang | Pelayanan Medis Profesional & Terpercaya</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -101,13 +101,14 @@
         }
     </script>
     <style>
-        /* Mencegah scroll kanan yang merusak frame HP */
+        /* FIX TOTAL: Mencegah scroll kanan miring yang merusak kerapian frame HP */
         html, body {
             margin: 0 !important;
             padding: 0 !important;
             box-sizing: border-box;
             overflow-x: hidden !important;
-            width: 100%2;
+            width: 100% !important;
+            max-width: 100% !important;
         }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -119,6 +120,12 @@
         }
         .hero-gradient {
             background: linear-gradient(to right, rgba(24, 29, 26, 0.8), rgba(24, 29, 26, 0.2));
+        }
+        .animate-bar {
+            animation: grow-bar 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes grow-bar {
+            from { width: 0; }
         }
     </style>
 </head>
@@ -276,10 +283,10 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter w-full">
                 
-                <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm">
+                <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm w-full max-w-full box-border">
                     <div class="flex items-center gap-4 mb-4">
-                        <img class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed flex-shrink-0" src="asset/mg.png" alt="Dokter Anak">
-                        <div class="min-w-0">
+                        <img class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed flex-shrink-0 bg-white" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Ahmad&backgroundColor=b6e3f4" alt="dr. Ahmad Santoso, Sp.A">
+                        <div class="min-w-0 flex-1">
                             <p class="font-label-bold text-sm font-bold text-primary truncate">dr. Ahmad Santoso, Sp.A</p>
                             <p class="font-caption text-xs text-on-surface-variant truncate font-semibold">Spesialis Anak</p>
                         </div>
@@ -299,10 +306,10 @@
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm">
+                <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm w-full max-w-full box-border">
                     <div class="flex items-center gap-4 mb-4">
-                        <img class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed flex-shrink-0" src="asset/mg.png" alt="Dokter Kandungan">
-                        <div class="min-w-0">
+                        <img class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed flex-shrink-0 bg-white" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Siti&backgroundColor=ffdfd3" alt="dr. Siti Rahma, Sp.OG">
+                        <div class="min-w-0 flex-1">
                             <p class="font-label-bold text-sm font-bold text-primary truncate">dr. Siti Rahma, Sp.OG</p>
                             <p class="font-caption text-xs text-on-surface-variant truncate font-semibold">Spesialis Kebidanan</p>
                         </div>
@@ -322,10 +329,10 @@
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm">
+                <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm w-full max-w-full box-border">
                     <div class="flex items-center gap-4 mb-4">
-                        <img class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed flex-shrink-0" src="asset/mg.png" alt="Dokter Dalam">
-                        <div class="min-w-0">
+                        <img class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed flex-shrink-0 bg-white" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Budi&backgroundColor=c0aede" alt="dr. Budi Setiawan, Sp.PD">
+                        <div class="min-w-0 flex-1">
                             <p class="font-label-bold text-sm font-bold text-primary truncate">dr. Budi Setiawan, Sp.PD</p>
                             <p class="font-caption text-xs text-on-surface-variant truncate font-semibold">Spesialis Penyakit Dalam</p>
                         </div>
@@ -345,10 +352,10 @@
                     </button>
                 </div>
 
-                <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm">
+                <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm w-full max-w-full box-border">
                     <div class="flex items-center gap-4 mb-4">
-                        <img class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed flex-shrink-0" src="asset/mg.png" alt="Dokter Saraf">
-                        <div class="min-w-0">
+                        <img class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed flex-shrink-0 bg-white" src="https://api.dicebear.com/7.x/adventurer/svg?seed=Maya&backgroundColor=d1f4c9" alt="dr. Maya Indah, Sp.N">
+                        <div class="min-w-0 flex-1">
                             <p class="font-label-bold text-sm font-bold text-primary truncate">dr. Maya Indah, Sp.N</p>
                             <p class="font-caption text-xs text-on-surface-variant truncate font-semibold">Spesialis Saraf</p>
                         </div>
@@ -377,6 +384,77 @@
                 </a>
             </div>
 
+        </div>
+    </section>
+
+    <section class="py-16 bg-background overflow-hidden w-full">
+        <div class="max-w-container-max mx-auto px-4 box-border w-full">
+            
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold text-primary uppercase tracking-widest bg-primary/10 px-3 py-1.5 rounded-full">Tim Medis</span>
+                <h2 class="text-h2 md:text-3xl font-bold text-primary mt-3 mb-4 font-montserrat">Dokter Spesialis Kami</h2>
+                <p class="text-xs md:text-sm text-on-surface-variant max-w-2xl mx-auto font-medium">Melayani dengan sepenuh hati bersama tenaga medis profesional, ahli, dan berpengalaman di bidangnya.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full box-border">
+                
+                <div class="bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:shadow-md transition-all flex flex-col justify-between items-center text-center w-full max-w-full box-border">
+                    <div class="relative mb-4">
+                        <div class="absolute inset-0 bg-primary/5 rounded-full scale-105"></div>
+                        <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Ahmad&backgroundColor=b6e3f4" alt="dr. Ahmad Santoso, Sp.A" class="w-24 h-24 rounded-full object-cover relative z-10 border-2 border-primary/20 bg-white">
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="font-montserrat font-bold text-sm text-primary">dr. Ahmad Santoso, Sp.A</h3>
+                        <p class="text-xs text-gray-500 font-semibold mt-1">Spesialis Anak</p>
+                    </div>
+                    <a href="jadwaldokter.html" class="w-full bg-[#005f48]/10 text-primary py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-white transition-all">
+                        Lihat Jadwal
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:shadow-md transition-all flex flex-col justify-between items-center text-center w-full max-w-full box-border">
+                    <div class="relative mb-4">
+                        <div class="absolute inset-0 bg-primary/5 rounded-full scale-105"></div>
+                        <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Siti&backgroundColor=ffdfd3" alt="dr. Siti Rahma, Sp.OG" class="w-24 h-24 rounded-full object-cover relative z-10 border-2 border-primary/20 bg-white">
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="font-montserrat font-bold text-sm text-primary">dr. Siti Rahma, Sp.OG</h3>
+                        <p class="text-xs text-gray-500 font-semibold mt-1">Spesialis Kebidanan & Kandungan</p>
+                    </div>
+                    <a href="jadwaldokter.html" class="w-full bg-[#005f48]/10 text-primary py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-white transition-all">
+                        Lihat Jadwal
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:shadow-md transition-all flex flex-col justify-between items-center text-center w-full max-w-full box-border">
+                    <div class="relative mb-4">
+                        <div class="absolute inset-0 bg-primary/5 rounded-full scale-105"></div>
+                        <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Budi&backgroundColor=c0aede" alt="dr. Budi Setiawan, Sp.PD" class="w-24 h-24 rounded-full object-cover relative z-10 border-2 border-primary/20 bg-white">
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="font-montserrat font-bold text-sm text-primary">dr. Budi Setiawan, Sp.PD</h3>
+                        <p class="text-xs text-gray-500 font-semibold mt-1">Spesialis Penyakit Dalam</p>
+                    </div>
+                    <a href="jadwaldokter.html" class="w-full bg-[#005f48]/10 text-primary py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-white transition-all">
+                        Lihat Jadwal
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:shadow-md transition-all flex flex-col justify-between items-center text-center w-full max-w-full box-border">
+                    <div class="relative mb-4">
+                        <div class="absolute inset-0 bg-primary/5 rounded-full scale-105"></div>
+                        <img src="https://api.dicebear.com/7.x/adventurer/svg?seed=Maya&backgroundColor=d1f4c9" alt="dr. Maya Indah, Sp.N" class="w-24 h-24 rounded-full object-cover relative z-10 border-2 border-primary/20 bg-white">
+                    </div>
+                    <div class="mb-5">
+                        <h3 class="font-montserrat font-bold text-sm text-primary">dr. Maya Indah, Sp.N</h3>
+                        <p class="text-xs text-gray-500 font-semibold mt-1">Spesialis Saraf</p>
+                    </div>
+                    <a href="jadwaldokter.html" class="w-full bg-[#005f48]/10 text-primary py-2.5 rounded-xl text-xs font-bold hover:bg-primary hover:text-white transition-all">
+                        Lihat Jadwal
+                    </a>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -566,7 +644,7 @@
             <div>
                 <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Pasien & Pengunjung</h4>
                 <ul class="space-y-3 text-xs font-medium">
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kebijalan Privasi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kebijakan Privasi</a></li>
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Syarat & Ketentuan</a></li>
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Prosedur Keluhan</a></li>
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kontak IGD</a></li>
@@ -607,7 +685,7 @@
             menuBtn.addEventListener('click', () => {
                 mobileMenu.classList.remove('translate-x-full');
                 overlay.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Mengunci layar agar tidak goyang saat menu aktif
+                document.body.style.overflow = 'hidden'; // Kunci scroll layar utama
             });
         }
 
@@ -615,13 +693,13 @@
         function closeSidebar() {
             mobileMenu.classList.add('translate-x-full');
             overlay.classList.add('hidden');
-            document.body.style.overflow = ''; // Mengaktifkan kembali scroll halaman
+            document.body.style.overflow = ''; // Aktifkan scroll kembali
         }
 
         if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
         if (overlay) overlay.addEventListener('click', closeSidebar);
 
-        // Fungsi Buka-Tutup Submenu Cabang (Accordion)
+        // Fungsi Buka-Tutup Submenu Cabang (Accordion Mobile)
         function toggleAccordion(panelId, iconId) {
             const panel = document.getElementById(panelId);
             const icon = document.getElementById(iconId);
@@ -661,7 +739,7 @@
             }
         });
 
-        // Sticky Compression Navigation Scroll Effect
+        // Sticky Navbar Effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (nav && window.scrollY > 50) {
