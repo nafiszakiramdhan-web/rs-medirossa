@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Laporan Kunjungan Pasien - RS Medirossa Cikarang</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#005f48",
+                        "primary-dark": "#004d3a",
+                        "secondary": "#006d37",
+                        "background": "#f6faf6",
+                        "surface": "#ffffff",
+                        "on-surface": "#181d1a",
+                        "on-surface-variant": "#3e4944",
+                        "outline-variant": "#bdc9c2",
+                        "error-red": "#ba1a1a",
+                        "error-bg": "#ffdad6"
+                    },
+                    fontFamily: {
+                        "montserrat": ["Montserrat"],
+                        "inter": ["Inter"]
+                    },
+                    spacing: {
+                        "stack-lg": "32px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max": "1280px"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-inter min-h-screen flex flex-col justify-between m-0 p-0">
+
+    <nav class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
+        <div class="max-w-container-max mx-auto w-full px-margin-mobile md:px-gutter flex justify-between items-center">
+            
+            <div class="flex items-center gap-3">
+                <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-primary/20 flex-shrink-0">
+                <span class="font-montserrat font-bold text-lg text-primary">RS Medirossa Cikarang</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-stack-lg text-sm font-semibold">
+                <a class="text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors" href="tentang.html">Profile</a>
+                
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+                        Layanan & Fasilitas <span class="material-symbols-outlined">expand_more</span>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 border border-outline-variant/30">
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="rawatjalan.html">Rawat Jalan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="rawatinap.html">Rawat Inap</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="penunjangmedis.html">Penunjang Medis</a>
+                    </div>
+                </div>
+                
+               <div class="relative group">
+                    <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+                        Informasi <span class="material-symbols-outlined">expand_more</span>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 border border-outline-variant/30 text-sm font-semibold">
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="jadwaldokter.html">Jadwal Dokter</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="alurpelayan.html">Alur Pelayanan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="kunjunganpasien.html">Data Kunjungan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="datapenyakit.html">Data Penyakit</a>
+                    </div>
+                </div>
+                
+                <a class="text-on-surface-variant hover:text-primary transition-colors" href="artikel.html">Articles</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a class="hidden md:flex items-center gap-2 bg-[#006d37] text-white px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90" 
+                   href="daftar.html">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+                    DAFTAR BEROBAT ONLINE
+                </a>
+                <button class="md:hidden text-primary">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-container-max mx-auto w-full px-margin-mobile md:px-gutter pt-24 pb-16 space-y-8 flex-1">
+        
+        <section class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-6">
+            <div class="space-y-1">
+                <h1 class="font-montserrat text-2xl md:text-3xl font-bold text-primary">Laporan Kunjungan Pasien</h1>
+                <p class="text-xs md:text-sm text-on-surface-variant">Analisis data statistik kunjungan pasien harian dan bulanan RS Medirossa Cikarang untuk periode tahun 2024.</p>
+            </div>
+            <div class="flex items-center gap-2 bg-white border border-outline-variant/60 rounded-xl px-4 py-2.5 text-xs font-semibold shadow-sm self-start sm:self-center">
+                <span class="material-symbols-outlined text-sm text-on-surface-variant">calendar_month</span>
+                <span id="period-text">Januari 2024 - Desember 2024</span>
+            </div>
+        </section>
+
+        <section class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-4">
+                <div class="space-y-0.5">
+                    <h3 class="font-montserrat text-base font-bold text-on-surface">Tren Kunjungan Berkala</h3>
+                    <p class="text-xs text-on-surface-variant">Visualisasi pertumbuhan volume pasien berdasarkan filter waktu</p>
+                </div>
+                <div class="flex bg-gray-100 p-1 rounded-xl self-start sm:self-center text-xs font-semibold">
+                    <button id="btn-3m" onclick="changeChartFilter('3m')" class="px-3 py-1.5 rounded-lg transition-all text-gray-500 hover:text-primary">3 Bulan</button>
+                    <button id="btn-6m" onclick="changeChartFilter('6m')" class="px-3 py-1.5 rounded-lg transition-all text-gray-500 hover:text-primary">½ Tahun</button>
+                    <button id="btn-1y" onclick="changeChartFilter('1y')" class="px-3 py-1.5 rounded-lg transition-all bg-white text-primary shadow-sm">1 Tahun</button>
+                </div>
+            </div>
+
+            <div class="relative w-full h-48 md:h-64 mt-4 flex flex-col justify-between">
+                <div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-40">
+                    <div class="w-full border-t border-dashed border-gray-200 h-px"></div>
+                    <div class="w-full border-t border-dashed border-gray-200 h-px"></div>
+                    <div class="w-full border-t border-dashed border-gray-200 h-px"></div>
+                    <div class="w-full border-t border-dashed border-gray-200 h-px"></div>
+                </div>
+
+                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#005f48" stop-opacity="0.15" />
+                            <stop offset="100%" stop-color="#005f48" stop-opacity="0.0" />
+                        </linearGradient>
+                    </defs>
+                    <path id="svg-area" d="M 0 160 Q 150 140 250 120 T 500 100 T 750 40 T 1000 60 L 1000 200 L 0 200 Z" fill="url(#chart-grad)" />
+                    <path id="svg-line" d="M 0 160 Q 150 140 250 120 T 500 100 T 750 40 T 1000 60" fill="none" stroke="#005f48" stroke-width="3" stroke-linecap="round" />
+                    
+                    <g id="svg-dots">
+                        <circle cx="250" cy="120" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                        <circle cx="500" cy="100" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                        <circle cx="750" cy="40" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                        <circle cx="1000" cy="60" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    </g>
+                </svg>
+
+                <div id="chart-labels" class="w-full flex justify-between text-[10px] md:text-xs text-gray-400 font-medium pt-2 mt-auto z-10">
+                    <span>Jan</span>
+                    <span>Mar</span>
+                    <span>Mei</span>
+                    <span>Jul</span>
+                    <span>Sep</span>
+                    <span>Nov</span>
+                    <span>Des</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+            <div class="p-5 border-b border-gray-100 flex justify-between items-center">
+                <h3 class="font-montserrat text-base font-bold text-on-surface">Data Statistik Rincian Kunjungan</h3>
+                <span id="page-indicator-top" class="text-xs font-semibold text-primary bg-emerald-50 px-2.5 py-1 rounded-md">Halaman 1/2</span>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                    <thead>
+                        <tr class="bg-gray-50/70 text-on-surface-variant font-bold border-b border-gray-100 text-[11px] md:text-xs uppercase tracking-wider">
+                            <th class="py-3.5 px-6">Bulan</th>
+                            <th class="py-3.5 px-6">Pasien Umum</th>
+                            <th class="py-3.5 px-6">Pasien BPJS/Asuransi</th>
+                            <th class="py-3.5 px-6">Total Kunjungan</th>
+                            <th class="py-3.5 px-6 text-right">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body" class="divide-y divide-gray-100 font-medium text-gray-700">
+                        <tr class="hover:bg-gray-50/40 transition-colors">
+                            <td class="py-4 px-6 font-bold text-on-surface">Januari 2024</td>
+                            <td class="py-4 px-6 opacity-80">450</td>
+                            <td class="py-4 px-6 opacity-80">1.230</td>
+                            <td class="py-4 px-6 font-bold text-primary text-sm">1.680</td>
+                            <td class="py-4 px-6 text-right"><a href="#" class="text-primary font-bold hover:underline">Detail</a></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/40 transition-colors">
+                            <td class="py-4 px-6 font-bold text-on-surface">Februari 2024</td>
+                            <td class="py-4 px-6 opacity-80">412</td>
+                            <td class="py-4 px-6 opacity-80">1.190</td>
+                            <td class="py-4 px-6 font-bold text-primary text-sm">1.602</td>
+                            <td class="py-4 px-6 text-right"><a href="#" class="text-primary font-bold hover:underline">Detail</a></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/40 transition-colors">
+                            <td class="py-4 px-6 font-bold text-on-surface">Maret 2024</td>
+                            <td class="py-4 px-6 opacity-80">580</td>
+                            <td class="py-4 px-6 opacity-80">1.450</td>
+                            <td class="py-4 px-6 font-bold text-primary text-sm">2.030</td>
+                            <td class="py-4 px-6 text-right"><a href="#" class="text-primary font-bold hover:underline">Detail</a></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/40 transition-colors">
+                            <td class="py-4 px-6 font-bold text-on-surface">April 2024</td>
+                            <td class="py-4 px-6 opacity-80">490</td>
+                            <td class="py-4 px-6 opacity-80">1.310</td>
+                            <td class="py-4 px-6 font-bold text-primary text-sm">1.800</td>
+                            <td class="py-4 px-6 text-right"><a href="#" class="text-primary font-bold hover:underline">Detail</a></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/40 transition-colors">
+                            <td class="py-4 px-6 font-bold text-on-surface">Mei 2024</td>
+                            <td class="py-4 px-6 opacity-80">620</td>
+                            <td class="py-4 px-6 opacity-80">1.580</td>
+                            <td class="py-4 px-6 font-bold text-primary text-sm">2.200</td>
+                            <td class="py-4 px-6 text-right"><a href="#" class="text-primary font-bold hover:underline">Detail</a></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50/40 transition-colors">
+                            <td class="py-4 px-6 font-bold text-on-surface">Juni 2024</td>
+                            <td class="py-4 px-6 opacity-80">510</td>
+                            <td class="py-4 px-6 opacity-80">1.390</td>
+                            <td class="py-4 px-6 font-bold text-primary text-sm">1.900</td>
+                            <td class="py-4 px-6 text-right"><a href="#" class="text-primary font-bold hover:underline">Detail</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-gray-50/50 px-6 py-3.5 border-t border-gray-100 flex justify-between items-center text-xs text-gray-500 font-medium">
+                <span id="page-text-bottom">Menampilkan bulan 1 - 6 dari 12 bulan total</span>
+                <div class="flex items-center gap-2">
+                    <button id="btn-prev" onclick="goToPage(1)" class="w-8 h-8 rounded-lg border border-gray-200 bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed" disabled>
+                        <span class="material-symbols-outlined text-sm">chevron_left</span>
+                    </button>
+                    <button id="btn-next" onclick="goToPage(2)" class="w-8 h-8 rounded-lg border border-gray-300 bg-white text-primary flex items-center justify-center hover:bg-gray-50 shadow-sm">
+                        <span class="material-symbols-outlined text-sm">chevron_right</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
+            
+            <div class="md:col-span-1 space-y-4">
+                <div class="flex items-center gap-3">
+                    <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-white/20 flex-shrink-0">
+                    <span class="font-montserrat text-lg font-bold text-white tracking-wide">RS Medirossa Cikarang</span>
+                </div>
+                <p class="text-xs text-gray-400 opacity-90 leading-relaxed">Bagian dari Medirossa Hospital Group, berkomitmen untuk memberikan layanan kesehatan berkualitas tinggi bagi masyarakat Indonesia.</p>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Rumah Sakit</h4>
+                <ul class="space-y-3 text-xs font-medium">
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Tentang Kami</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Visi & Misi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">artikel</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Pasien & Pengunjung</h4>
+                <ul class="space-y-3 text-xs font-medium">
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kebijakan Privasi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Syarat & Ketentuan</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Prosedur Keluhan</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kontak IGD</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Hubungi Kami</h4>
+                <div class="space-y-3 text-xs font-medium text-gray-300">
+                    <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-[#6bfe9c]">phone</span> (021) 899-722-22</p>
+                    <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-[#6bfe9c]">mail</span> info@medirossacikarang.com</p>
+                    <div class="mt-4">
+                        <p class="mb-2 text-gray-400 text-[11px]">Langganan Artikel Kesehatan:</p>
+                        <div class="flex max-w-xs bg-[#242926] rounded-lg p-1 border border-white/5">
+                            <input class="bg-transparent border-none text-white px-3 py-2 w-full text-xs focus:ring-0 outline-none placeholder-gray-500" placeholder="Email Anda" type="email">
+                            <button class="bg-[#005f48] text-white px-4 rounded-md hover:bg-[#004d3a] transition-colors text-xs font-bold">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-gray-500 font-medium">
+            <p>© 2024 RS Medirossa Cikarang. Member of Medirossa Hospital Group. Licensed Healthcare Provider.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data Setahun Penuh Rumah Sakit (12 Bulan Lengkap)
+        const fullYearData = [
+            { month: "Januari 2024", umum: 450, bpjs: 1230, total: 1680 },
+            { month: "Februari 2024", umum: 412, bpjs: 1190, total: 1602 },
+            { month: "Maret 2024", umum: 580, bpjs: 1450, total: 2030 },
+            { month: "April 2024", umum: 490, bpjs: 1310, total: 1800 },
+            { month: "Mei 2024", umum: 620, bpjs: 1580, total: 2200 },
+            { month: "Juni 2024", umum: 510, bpjs: 1390, total: 1900 },
+            { month: "Juli 2024", umum: 480, bpjs: 1410, total: 1890 },
+            { month: "Agustus 2024", umum: 530, bpjs: 1520, total: 2050 },
+            { month: "September 2024", umum: 460, bpjs: 1300, total: 1760 },
+            { month: "Oktober 2024", umum: 590, bpjs: 1610, total: 2200 },
+            { month: "November 2024", umum: 610, bpjs: 1640, total: 2250 },
+            { month: "Desember 2024", umum: 640, bpjs: 1710, total: 2350 }
+        ];
+
+        // 1. Logika Pagination Tabel (Membagi Data Menjadi 2 Halaman)
+        function goToPage(pageNum) {
+            const tbody = document.getElementById('table-body');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+            const indicatorTop = document.getElementById('page-indicator-top');
+            const textBottom = document.getElementById('page-text-bottom');
+            
+            tbody.innerHTML = "";
+            let start = (pageNum === 1) ? 0 : 6;
+            let end = (pageNum === 1) ? 6 : 12;
+            
+            const pageData = fullYearData.slice(start, end);
+            
+            pageData.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = "hover:bg-gray-50/40 transition-colors";
+                row.innerHTML = `
+                    <td class="py-4 px-6 font-bold text-on-surface">${item.month}</td>
+                    <td class="py-4 px-6 opacity-80">${item.umum}</td>
+                    <td class="py-4 px-6 opacity-80">${item.bpjs}</td>
+                    <td class="py-4 px-6 font-bold text-primary text-sm">${item.total}</td>
+                    <td class="py-4 px-6 text-right"><a href="#" class="text-primary font-bold hover:underline">Detail</a></td>
+                `;
+                tbody.appendChild(row);
+            });
+
+            // Update State Button & Teks Keterangan
+            if (pageNum === 1) {
+                btnPrev.disabled = true;
+                btnPrev.className = "w-8 h-8 rounded-lg border border-gray-200 bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed";
+                btnNext.disabled = false;
+                btnNext.className = "w-8 h-8 rounded-lg border border-gray-300 bg-white text-primary flex items-center justify-center hover:bg-gray-50 shadow-sm";
+                indicatorTop.innerText = "Halaman 1/2";
+                textBottom.innerText = "Menampilkan bulan 1 - 6 dari 12 bulan total";
+            } else {
+                btnNext.disabled = true;
+                btnNext.className = "w-8 h-8 rounded-lg border border-gray-200 bg-gray-100 text-gray-400 flex items-center justify-center cursor-not-allowed";
+                btnPrev.disabled = false;
+                btnPrev.className = "w-8 h-8 rounded-lg border border-gray-300 bg-white text-primary flex items-center justify-center hover:bg-gray-50 shadow-sm";
+                indicatorTop.innerText = "Halaman 2/2";
+                textBottom.innerText = "Menampilkan bulan 7 - 12 dari 12 bulan total";
+            }
+        }
+
+        // 2. Logika Filter Grafik SVG Dinamis (3 Bulan, Setengah Tahun, 1 Tahun)
+        function changeChartFilter(type) {
+            const btn3m = document.getElementById('btn-3m');
+            const btn6m = document.getElementById('btn-6m');
+            const btn1y = document.getElementById('btn-1y');
+            const svgLine = document.getElementById('svg-line');
+            const svgArea = document.getElementById('svg-area');
+            const svgDots = document.getElementById('svg-dots');
+            const labelContainer = document.getElementById('chart-labels');
+
+            // Reset active style filter buttons
+            [btn3m, btn6m, btn1y].forEach(b => {
+                b.className = "px-3 py-1.5 rounded-lg transition-all text-gray-500 hover:text-primary";
+            });
+
+            if (type === '3m') {
+                btn3m.className = "px-3 py-1.5 rounded-lg transition-all bg-white text-primary shadow-sm";
+                // Mengubah path jalur grafik untuk range 3 bulan
+                svgLine.setAttribute('d', 'M 0 150 Q 250 100 500 40 T 1000 90');
+                svgArea.setAttribute('d', 'M 0 150 Q 250 100 500 40 T 1000 90 L 1000 200 L 0 200 Z');
+                svgDots.innerHTML = `
+                    <circle cx="0" cy="150" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    <circle cx="500" cy="40" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    <circle cx="1000" cy="90" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                `;
+                labelContainer.innerHTML = '<span>Oktober</span><span>November</span><span>Desember</span>';
+            } 
+            else if (type === '6m') {
+                btn6m.className = "px-3 py-1.5 rounded-lg transition-all bg-white text-primary shadow-sm";
+                // Mengubah path jalur grafik untuk range setengah tahun
+                svgLine.setAttribute('d', 'M 0 160 Q 200 110 400 130 T 700 60 T 1000 40');
+                svgArea.setAttribute('d', 'M 0 160 Q 200 110 400 130 T 700 60 T 1000 40 L 1000 200 L 0 200 Z');
+                svgDots.innerHTML = `
+                    <circle cx="0" cy="160" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    <circle cx="400" cy="130" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    <circle cx="700" cy="60" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    <circle cx="1000" cy="40" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                `;
+                labelContainer.innerHTML = '<span>Juli</span><span>September</span><span>November</span><span>Desember</span>';
+            } 
+            else if (type === '1y') {
+                btn1y.className = "px-3 py-1.5 rounded-lg transition-all bg-white text-primary shadow-sm";
+                // Mengubah path kembalikan ke setahun penuh
+                svgLine.setAttribute('d', 'M 0 160 Q 150 140 250 120 T 500 100 T 750 40 T 1000 60');
+                svgArea.setAttribute('d', 'M 0 160 Q 150 140 250 120 T 500 100 T 750 40 T 1000 60 L 1000 200 L 0 200 Z');
+                svgDots.innerHTML = `
+                    <circle cx="250" cy="120" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    <circle cx="500" cy="100" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    <circle cx="750" cy="40" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                    <circle cx="1000" cy="60" r="4" fill="white" stroke="#005f48" stroke-width="2" />
+                `;
+                labelContainer.innerHTML = '<span>Jan</span><span>Mar</span><span>Mei</span><span>Jul</span><span>Sep</span><span>Nov</span><span>Des</span>';
+            }
+        }
+    </script>
+</body>
+</html>

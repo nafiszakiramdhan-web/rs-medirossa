@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tentang Kami - RS Medirossa Cikarang</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#6bfe9c",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#005143",
+                        "inverse-surface": "#2e3131",
+                        "surface": "#ffffff",
+                        "background": "#f6faf6",
+                        "surface-container": "#eceeee",
+                        "on-surface-variant": "#3e4945",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface-bright": "#f8fafa",
+                        "on-primary-fixed": "#00201a",
+                        "on-primary": "#ffffff",
+                        "on-background": "#191c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#004980",
+                        "secondary-container": "#81b9ff",
+                        "tertiary-container": "#be1a1e",
+                        "on-secondary-fixed-variant": "#004880",
+                        "surface-container-low": "#f2f4f4",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f1",
+                        "secondary": "#006d37",
+                        "tertiary-fixed-dim": "#ffb4ac",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#97000e",
+                        "on-tertiary-fixed-variant": "#93000d",
+                        "surface-container-highest": "#e1e3e3",
+                        "primary-fixed-dim": "#81d6c0",
+                        "on-primary-container": "#96ebd5",
+                        "surface-variant": "#e1e3e3",
+                        "secondary-fixed-dim": "#a1c9ff",
+                        "on-surface": "#191c1d",
+                        "outline-variant": "#bec9c4",
+                        "outline": "#6e7975",
+                        "surface-dim": "#d8dada",
+                        "surface-container-high": "#e6e8e9",
+                        "primary": "#005f48",
+                        "on-tertiary-container": "#ffd1cc",
+                        "tertiary-fixed": "#ffdad6",
+                        "primary-container": "#006d5b",
+                        "primary-fixed": "#9df3dc",
+                        "inverse-primary": "#81d6c0",
+                        "on-tertiary-fixed": "#410002",
+                        "surface-tint": "#006b59",
+                        "on-secondary-fixed": "#001c37"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "48px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "stack-lg": "32px"
+                    },
+                    "fontFamily": {
+                        "caption": ["Inter"],
+                        "label-bold": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "montserrat": ["Montserrat"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            scroll-behavior: smooth;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(234, 239, 239, 0.5);
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-on-surface bg-background m-0 p-0">
+
+    <nav class="fixed top-0 left-0 right-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
+        <div class="max-w-container-max mx-auto w-full px-margin-mobile md:px-gutter flex justify-between items-center">
+            
+            <div class="flex items-center gap-3">
+                <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-primary/20 flex-shrink-0">
+                <span class="font-montserrat font-bold text-lg text-primary">RS Medirossa Cikarang</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-stack-lg text-sm font-semibold">
+                <a class="text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="text-primary border-b-2 border-primary pb-1" href="tentang.html">Profile</a>
+                
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+                        Layanan & Fasilitas <span class="material-symbols-outlined">expand_more</span>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 border border-outline-variant/30">
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="rawatjalan.html">Rawat Jalan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="rawatinap.html">Rawat Inap</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="penunjangmedis.html">Penunjang Medis</a>
+                    </div>
+                </div>
+                
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+                        Informasi <span class="material-symbols-outlined">expand_more</span>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 border border-outline-variant/30 text-sm font-semibold">
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="jadwaldokter.html">Jadwal Dokter</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="alurpelayan.html">Alur Pelayanan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="kunjunganpasien.html">Data Kunjungan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="datapenyakit.html">Data Penyakit</a>
+                    </div>
+                </div>
+                
+                <a class="text-on-surface-variant hover:text-primary transition-colors" href="artikel.html">Articles</a>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <a class="hidden md:flex items-center gap-2 bg-[#006d37] text-white px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90 text-xs" 
+                   href="daftar.html">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+                    DAFTAR BEROBAT ONLINE
+                </a>
+                <button class="md:hidden text-primary">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow pt-20 w-full">
+        <section class="relative h-[400px] md:h-[500px] flex items-center overflow-hidden">
+            <img alt="Hospital Banner" class="absolute inset-0 w-full h-full object-cover" src="asset/rs.png"/>
+            <div class="absolute inset-0 bg-gradient-to-r from-[#005f48]/90 to-transparent"></div>
+            <div class="relative w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+                <div class="max-w-2xl text-white">
+                    <h1 class="font-montserrat text-3xl md:text-5xl font-bold text-white leading-tight mb-4">Mengenal RS Medirossa Cikarang</h1>
+                    <p class="font-body-lg text-sm md:text-base text-white/90 leading-relaxed">Melayani dengan Kasih Sayang sejak 2005. Menjadi mitra kesehatan terpercaya bagi masyarakat Cikarang dan sekitarnya.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+                    <div class="md:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary font-semibold text-xs">
+                            <span class="material-symbols-outlined text-sm">history</span>
+                            Sejarah Kami
+                        </div>
+                        <h2 class="font-montserrat text-2xl md:text-3xl font-bold text-primary">Dedikasi Kesehatan Selama Hampir Dua Dekade</h2>
+                        <div class="space-y-4 text-on-surface-variant text-xs md:text-sm leading-relaxed font-medium">
+                            <p>Didirikan pada tahun 2005, RS Medirossa Cikarang bermula dari visi sederhana untuk menyediakan akses kesehatan yang berkualitas dan manusiawi di kawasan industri Cikarang. Seiring pertumbuhan pesat wilayah ini, kami terus bertransformasi menjadi Rumah Sakit tipe C yang modern dan komprehensif.</p>
+                            <p>Perjalanan kami selama lebih dari 18 tahun didorong oleh semangat inovasi dalam pelayanan medis, peningkatan berkelanjutan pada fasilitas penunjang, dan yang terpenting, komitmen tanpa henti dari tim medis kami untuk memberikan perawatan yang personal bagi setiap pasien.</p>
+                        </div>
+                        <div class="flex flex-wrap gap-4 pt-4">
+                            <div class="flex-1 min-w-[120px] p-5 rounded-xl bg-gray-50 text-center border border-outline-variant/30">
+                                <div class="text-2xl md:text-3xl font-bold text-primary mb-1">18+</div>
+                                <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Tahun Pengalaman</div>
+                            </div>
+                            <div class="flex-1 min-w-[120px] p-5 rounded-xl bg-gray-50 text-center border border-outline-variant/30">
+                                <div class="text-2xl md:text-3xl font-bold text-primary mb-1">50+</div>
+                                <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Dokter Spesialis</div>
+                            </div>
+                            <div class="flex-1 min-w-[120px] p-5 rounded-xl bg-gray-50 text-center border border-outline-variant/30">
+                                <div class="text-2xl md:text-3xl font-bold text-primary mb-1">24/7</div>
+                                <div class="text-[10px] text-gray-400 uppercase font-bold tracking-wider">Layanan Darurat</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-5">
+                        <div class="relative group mt-8 md:mt-0">
+                            <div class="absolute -inset-4 bg-primary/5 rounded-3xl transform rotate-2 group-hover:rotate-0 transition-transform duration-500"></div>
+                            <img alt="Management Team" class="relative rounded-2xl shadow-md w-full aspect-[4/5] object-cover border border-gray-100" src="asset/mg.png"/>
+                            <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur p-4 rounded-xl shadow-md border border-primary/10">
+                                <p class="text-primary font-bold text-sm font-montserrat">dr. Hj. Musfiroh, M.Kes</p>
+                                <p class="text-on-surface-variant text-xs font-semibold">Direktur Utama RS Medirossa Cikarang</p>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-surface-container-low/50 border-t border-b border-gray-100">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="font-montserrat text-2xl md:text-3xl font-bold text-primary mb-3">Filosofi Pelayanan Kami</h2>
+                    <p class="text-xs md:text-sm text-on-surface-variant font-medium">Visi dan misi kami bukan sekadar tulisan, melainkan komitmen harian yang kami jalankan dengan integritas tinggi.</p>
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter items-stretch">
+                    <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200/60 shadow-sm flex flex-col">
+                            <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary mb-6">
+                                <span class="material-symbols-outlined text-2xl">visibility</span>
+                            </div>
+                            <h3 class="font-montserrat text-lg font-bold text-primary mb-3">Visi</h3>
+                            <p class="text-xs md:text-sm text-on-surface-variant leading-relaxed font-medium flex-grow">
+                                Menjadi rumah sakit pilihan utama masyarakat Bekasi dan sekitarnya dengan keunggulan pada mutu pelayanan dan keselamatan pasien yang didukung oleh sumber daya manusia yang profesional dan empati.
+                            </p>
+                        </div>
+                        <div class="bg-white p-8 rounded-2xl border border-gray-200/60 shadow-sm flex flex-col">
+                            <div class="w-12 h-12 bg-emerald-50 text-secondary rounded-xl flex items-center justify-center mb-6">
+                                <span class="material-symbols-outlined text-2xl">rocket_launch</span>
+                            </div>
+                            <h3 class="font-montserrat text-lg font-bold text-secondary mb-3">Misi</h3>
+                            <ul class="space-y-4 text-xs md:text-sm font-medium text-on-surface-variant flex-grow">
+                                <li class="flex gap-3 items-start">
+                                    <span class="material-symbols-outlined text-secondary shrink-0 text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    <p class="leading-normal">Memberikan pelayanan kesehatan yang cepat, akurat, dan bermutu tinggi.</p>
+                                </li>
+                                <li class="flex gap-3 items-start">
+                                    <span class="material-symbols-outlined text-secondary shrink-0 text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    <p class="leading-normal">Menyediakan fasilitas medis yang modern dan terintegrasi secara digital.</p>
+                                </li>
+                                <li class="flex gap-3 items-start">
+                                    <span class="material-symbols-outlined text-secondary shrink-0 text-sm mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                    <p class="leading-normal">Membangun lingkungan kerja yang menjunjung tinggi etika dan profesionalisme.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bg-[#005f48] p-8 rounded-2xl text-white shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-montserrat text-lg font-bold mb-6 tracking-wide">Core Values</h3>
+                            <div class="space-y-5 text-xs">
+                                <div class="flex items-start gap-4">
+                                    <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-base">favorite</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-[#6bfe9c]">Kasih Sayang</h4>
+                                        <p class="text-white/80 mt-0.5 font-medium">Empati dalam setiap interaksi pasien.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-base">verified</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-[#6bfe9c]">Integritas</h4>
+                                        <p class="text-white/80 mt-0.5 font-medium">Kejujuran dan tanggung jawab medis.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-base">groups</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-[#6bfe9c]">Kolaborasi</h4>
+                                        <p class="text-white/80 mt-0.5 font-medium">Kerjasama tim untuk pemulihan optimal.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <div class="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-base">award_star</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-[#6bfe9c]">Keunggulan</h4>
+                                        <p class="text-white/80 mt-0.5 font-medium">Selalu memberikan yang terbaik.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-white/10 text-center sm:text-left">
+                            <p class="text-xs italic text-white/70 font-medium">"Melayani dengan Kasih Sayang"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16">
+            <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full">
+                <div class="bg-[#eaefeb] border border-outline-variant/30 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
+                    <div class="text-on-surface">
+                        <h2 class="font-montserrat text-xl md:text-2xl font-bold text-primary mb-2">Ingin tahu lebih lanjut?</h2>
+                        <p class="text-xs md:text-sm font-semibold text-on-surface-variant">Dapatkan informasi detail mengenai jadwal dokter dan fasilitas kami.</p>
+                    </div>
+                    <div class="flex flex-wrap gap-4 text-xs font-bold w-full md:w-auto">
+                        <a href="jadwaldokter.html" class="bg-primary text-white px-6 py-3.5 rounded-xl hover:opacity-90 transition-all flex items-center justify-center gap-2 shadow-sm w-full sm:w-auto">
+                            <span class="material-symbols-outlined text-sm">calendar_month</span>
+                            Cek Jadwal Dokter
+                        </a>
+                        <a href="daftar.html" class="bg-white text-secondary border border-outline-variant/80 px-6 py-3.5 rounded-xl hover:bg-gray-50 transition-all flex items-center justify-center gap-2 shadow-sm w-full sm:w-auto">
+                            <span class="material-symbols-outlined text-sm">call</span>
+                            Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
+            
+            <div class="md:col-span-1 space-y-4">
+                <div class="flex items-center gap-3">
+                    <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-white/20 flex-shrink-0">
+                    <span class="font-montserrat text-lg font-bold text-white tracking-wide">RS Medirossa Cikarang</span>
+                </div>
+                <p class="text-xs text-gray-400 opacity-90 leading-relaxed">Bagian dari Medirossa Hospital Group, berkomitmen untuk memberikan layanan kesehatan berkualitas tinggi bagi masyarakat Indonesia.</p>
+            </div>
+            
+             <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Rumah Sakit</h4>
+                <ul class="space-y-3 text-xs font-medium">
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Tentang Kami</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Visi & Misi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">artikel</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Pasien & Pengunjung</h4>
+                <ul class="space-y-3 text-xs font-medium">
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all animate-none" href="#">Kebijakan Privasi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all animate-none" href="#">Syarat & Ketentuan</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all animate-none" href="#">Prosedur Keluhan</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all animate-none" href="#">Kontak IGD</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Hubungi Kami</h4>
+                <div class="space-y-3 text-xs font-medium text-gray-300">
+                    <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-[#6bfe9c]">phone</span> (021) 899-722-22</p>
+                    <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-[#6bfe9c]">mail</span> info@medirossacikarang.com</p>
+                    <div class="mt-4">
+                        <p class="mb-2 text-gray-400 text-[11px]">Langganan Artikel Kesehatan:</p>
+                        <div class="flex max-w-xs bg-[#242926] rounded-lg p-1 border border-white/5">
+                            <input class="bg-transparent border-none text-white px-3 py-2 w-full text-xs focus:ring-0 outline-none placeholder-gray-500" placeholder="Email Anda" type="email">
+                            <button class="bg-[#005f48] text-white px-4 rounded-md hover:bg-[#004d3a] transition-colors text-xs font-bold">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-gray-500 font-medium">
+            <p>© 2024 RS Medirossa Cikarang. Member of Medirossa Hospital Group. Licensed Healthcare Provider.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

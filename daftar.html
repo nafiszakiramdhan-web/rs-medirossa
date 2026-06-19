@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Hubungi Kami - RS Medirossa Cikarang</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .active-dropdown-shadow {
+            box-shadow: 0 10px 40px -10px rgba(0, 95, 72, 0.15);
+        }
+        .emergency-pulse {
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(186, 26, 26, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(186, 26, 26, 0); }
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "surface-bright": "#f6faf6",
+                "tertiary-container": "#5b6d81",
+                "primary-container": "#007a5e",
+                "on-tertiary-fixed": "#091d2e",
+                "tertiary-fixed-dim": "#b5c8df",
+                "on-tertiary": "#ffffff",
+                "on-secondary-container": "#00743a",
+                "on-surface": "#181d1a",
+                "on-tertiary-fixed-variant": "#36485b",
+                "on-secondary-fixed-variant": "#005228",
+                "inverse-on-surface": "#edf2ee",
+                "outline-variant": "#bdc9c2",
+                "on-surface-variant": "#3e4944",
+                "on-background": "#181d1a",
+                "secondary": "#006d37",
+                "surface-container-lowest": "#ffffff",
+                "on-tertiary-container": "#e2eeff",
+                "secondary-container": "#6bfe9c",
+                "surface-container-low": "#f0f5f0",
+                "outline": "#6e7a74",
+                "surface-dim": "#d7dbd7",
+                "on-primary-fixed": "#002117",
+                "surface-container-high": "#e5e9e5",
+                "tertiary": "#435568",
+                "primary-fixed-dim": "#79d8b7",
+                "on-primary-fixed-variant": "#00513d",
+                "inverse-primary": "#79d8b7",
+                "surface-container-highest": "#dfe4df",
+                "primary-fixed": "#95f5d2",
+                "primary": "#005f48",
+                "on-error": "#ffffff",
+                "secondary-fixed": "#6bfe9c",
+                "on-error-container": "#93000a",
+                "tertiary-fixed": "#d1e4fb",
+                "error": "#ba1a1a",
+                "surface": "#f6faf6",
+                "inverse-surface": "#2c322f",
+                "on-secondary-fixed": "#00210c",
+                "surface-variant": "#dfe4df",
+                "surface-tint": "#006c53",
+                "surface-container": "#eaefeb",
+                "on-primary-container": "#a4ffdd",
+                "secondary-fixed-dim": "#4ae183",
+                "on-secondary": "#ffffff",
+                "on-primary": "#ffffff",
+                "background": "#f6faf6",
+                "error-container": "#ffdad6"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+              "spacing": {
+                "margin-mobile": "16px",
+                "stack-lg": "32px",
+                "container-max": "1280px",
+                "stack-sm": "8px",
+                "stack-md": "16px",
+                "section-padding": "80px",
+                "gutter": "24px"
+              },
+              "fontFamily": {
+                "body-lg": ["Inter"],
+                "label-bold": ["Inter"],
+                "caption": ["Inter"],
+                "h1-desktop": ["Montserrat"],
+                "h3": ["Montserrat"],
+                "body-md": ["Inter"],
+                "h2": ["Montserrat"],
+                "h1-mobile": ["Montserrat"]
+              },
+              "fontSize": {
+                "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "600"}],
+                "caption": ["12px", {"lineHeight": "1.4", "fontWeight": "400"}],
+                "h1-desktop": ["48px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                "h1-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed min-h-screen flex flex-col justify-between m-0 p-0">
+
+    <nav class="fixed top-0 left-0 right-0 w-full z-50 bg-surface/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
+        <div class="max-w-container-max mx-auto w-full px-margin-mobile md:px-gutter flex justify-between items-center">
+            
+            <div class="flex items-center gap-3">
+                <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-primary/20 flex-shrink-0">
+                <span class="font-h3 text-h3 font-bold text-primary">RS Medirossa Cikarang</span>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-stack-lg">
+                <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
+                <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" href="tentang.html">Profile</a>
+                <div class="relative group">
+                    <button class="flex items-center gap-1 font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors">
+                        Layanan & Fasilitas <span class="material-symbols-outlined">expand_more</span>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 border border-outline-variant/30">
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="rawatjalan.html">Rawat Jalan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="rawatinap.html">Rawat Inap</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="penunjangmedis.html">Penunjang Medis</a>
+                    </div>
+                </div>
+                <div class="relative group">
+                    <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
+                        Informasi <span class="material-symbols-outlined">expand_more</span>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-48 bg-white shadow-xl rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 border border-outline-variant/30 text-sm font-semibold">
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="jadwaldokter.html">Jadwal Dokter</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="alurpelayan.html">Alur Pelayanan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="kunjunganpasien.html">Data Kunjungan</a>
+                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="datapenyakit.html">Data Penyakit</a>
+                    </div>
+                </div>
+                <a class="font-label-bold text-label-bold text-on-surface-variant hover:text-primary transition-colors" href="artikel.html">Articles</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a class="hidden md:flex items-center gap-2 bg-[#006d37] text-white px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90" 
+                   href="daftar.html">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+                    DAFTAR BEROBAT ONLINE
+                </a>
+                <button class="md:hidden text-primary">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-section-padding px-margin-mobile md:px-gutter max-w-container-max mx-auto w-full flex-grow">
+        
+        <div class="mb-stack-lg mt-6">
+            <h1 class="font-h1-desktop text-3xl md:text-5xl font-bold text-on-background mb-4 font-montserrat">Hubungi Kami</h1>
+            <p class="text-on-surface-variant text-body-lg font-body-lg max-w-2xl">Kami siap melayani kebutuhan medis Anda 24/7. Silakan gunakan informasi di bawah ini untuk bantuan pendaftaran atau keadaan darurat.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-stack-lg items-start">
+            
+            <div class="lg:col-span-5 flex flex-col gap-stack-lg">
+                <div class="emergency-pulse border-2 border-error bg-error-container/20 rounded-2xl p-6 flex items-center gap-4 transition-all">
+                    <div class="bg-error text-on-error w-14 h-14 rounded-full flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[32px]">e911_emergency</span>
+                    </div>
+                    <div>
+                        <p class="text-error font-bold uppercase tracking-wider text-caption">Emergency Call 24 Jam</p>
+                        <p class="text-on-background font-h3 text-xl font-bold">0822-6110-7834</p>
+                    </div>
+                </div>
+
+                <div class="bg-surface-container-low border border-outline-variant rounded-xl p-8 shadow-sm group hover:border-primary transition-colors">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-on-secondary-container text-white rounded-xl flex items-center justify-center">
+                            <span class="material-symbols-outlined text-[28px]">phone_iphone</span>
+                        </div>
+                        <div>
+                            <h3 class="font-h3 text-lg font-bold text-on-background font-montserrat">WhatsApp Pendaftaran</h3>
+                            <p class="text-on-surface-variant text-xs">Khusus Rawat Jalan</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4 border border-outline-variant/30 mb-6">
+                        <span class="text-on-surface-variant block mb-1 font-label-bold text-xs">Hubungi Sekarang:</span>
+                        <span class="text-on-background font-h2 text-xl font-bold block">0812-1925-0173</span>
+                    </div>
+                    <a class="w-full flex justify-center items-center gap-2 bg-primary text-on-primary py-4 rounded-xl font-label-bold text-label-bold hover:opacity-90 transition-all text-xs font-bold shadow-sm" href="https://wa.me/6281219250173" target="_blank">
+                        <span class="material-symbols-outlined text-sm">chat_bubble</span>
+                        Chat WhatsApp Sekarang
+                    </a>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <a class="flex items-center justify-between p-5 bg-white border border-outline-variant rounded-xl hover:shadow-md hover:border-primary transition-all group" href="jadwaldokter.html">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-primary">calendar_month</span>
+                            <span class="font-label-bold text-xs text-on-background">Cek Jadwal Dokter Hari Ini</span>
+                        </div>
+                        <span class="material-symbols-outlined text-on-surface-variant group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </a>
+                </div>
+
+                <div class="bg-white border border-outline-variant rounded-xl p-8 space-y-6 text-xs font-semibold">
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-primary">call</span>
+                        <div>
+                            <p class="text-on-background">Customer Service</p>
+                            <p class="text-on-surface-variant font-normal mt-0.5">(021) 8995 5555</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-primary">mail</span>
+                        <div>
+                            <p class="text-on-background">Email Informasi</p>
+                            <p class="text-on-surface-variant font-normal mt-0.5">info@medirossacikarang.com</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="material-symbols-outlined text-primary">schedule</span>
+                        <div>
+                            <p class="text-on-background">Jam Operasional</p>
+                            <p class="text-on-surface-variant font-normal mt-0.5">Layanan IGD & Rawat Inap: 24 Jam</p>
+                            <p class="text-on-surface-variant font-normal">Poliklinik: Sesuai Jadwal Dokter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 flex flex-col gap-stack-lg">
+                
+                <section class="bg-white border border-outline-variant rounded-3xl p-8 shadow-sm">
+                    <div class="mb-6">
+                        <h2 class="font-h2 text-xl font-bold text-on-background mb-2 font-montserrat">Kirim Pesan ke Kami</h2>
+                        <div class="w-16 h-1 bg-primary rounded-full mb-3"></div>
+                        <p class="text-on-surface-variant text-xs">Silakan isi formulir di bawah ini jika ada pertanyaan atau saran.</p>
+                    </div>
+                    
+                    <form class="space-y-4" id="contact-form" onsubmit="return validateFormSubmit(event)">
+                        <div class="space-y-1">
+                            <label class="block font-label-bold text-xs text-on-surface-variant" for="name">Nama</label>
+                            <input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:outline-none transition-colors bg-surface-bright text-xs req-field" id="name" placeholder="Nama Lengkap Anda" type="text" oninput="checkFormValidity()"/>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block font-label-bold text-xs text-on-surface-variant" for="email">Email</label>
+                            <input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:outline-none transition-colors bg-surface-bright text-xs req-field" id="email" placeholder="Alamat Email Aktif" type="email" oninput="checkFormValidity()"/>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block font-label-bold text-xs text-on-surface-variant" for="subject">Subjek</label>
+                            <input class="w-full px-4 py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:outline-none transition-colors bg-surface-bright text-xs req-field" id="subject" placeholder="Topik Pesan" type="text" oninput="checkFormValidity()"/>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="block font-label-bold text-xs text-on-surface-variant" for="message">Pesan</label>
+                            <textarea class="w-full px-4 py-2.5 rounded-lg border border-outline-variant focus:border-primary focus:outline-none transition-colors bg-surface-bright text-xs req-field" id="message" placeholder="Tuliskan pesan Anda di sini..." rows="4" oninput="checkFormValidity()"></textarea>
+                        </div>
+                        
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                            <div id="captcha-box" class="bg-surface-container-low border border-outline-variant/30 p-3 rounded-lg flex items-center gap-3 w-full sm:w-auto opacity-40 transition-all duration-300 select-none">
+                                <input type="checkbox" id="not-a-robot" disabled onclick="toggleRobotCheck()" class="w-5 h-5 border-2 border-outline-variant rounded bg-white text-primary focus:ring-primary cursor-not-allowed transition-all">
+                                <span class="text-xs text-on-surface-variant font-medium">I'm not a robot</span>
+                            </div>
+                            
+                            <button id="submit-btn" disabled class="w-full sm:w-fit bg-gray-400 text-white px-8 py-3 rounded-lg font-bold text-xs transition-all cursor-not-allowed shadow-sm" type="submit">
+                                Kirim Pesan
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <div class="space-y-4">
+                    <div class="relative w-full aspect-[4/3] md:aspect-video rounded-3xl overflow-hidden shadow-md border border-outline-variant">
+                        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('asset/map.png');"></div>
+                        <div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <div class="bg-primary text-on-primary p-4 rounded-2xl shadow-xl flex items-center gap-3 animate-bounce pointer-events-auto">
+                                <span class="material-symbols-outlined text-[28px]">local_hospital</span>
+                                <div class="pr-1">
+                                    <p class="text-[10px] font-bold uppercase opacity-80">Lokasi Kami</p>
+                                    <p class="font-montserrat text-sm font-bold">RS Medirossa Cikarang</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border border-outline-variant shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div class="max-w-md text-xs">
+                            <h4 class="font-montserrat text-sm font-bold text-on-background mb-1">Lokasi Utama</h4>
+                            <p class="text-on-surface-variant font-medium leading-relaxed">
+                                Jl. Industri Tegal Gede No.12, Cikarang Selatan, Bekasi, Jawa Barat 17530
+                            </p>
+                        </div>
+                        <a class="shrink-0 flex items-center justify-center gap-2 bg-[#181d1a] text-white px-6 py-4 rounded-xl font-bold text-xs hover:bg-black transition-all active:scale-95 shadow-sm group" href="https://maps.google.com" target="_blank">
+                            <span class="material-symbols-outlined group-hover:rotate-12 transition-transform text-sm">directions</span>
+                            Buka Google Maps
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Rumah Sakit</h4>
+                <ul class="space-y-3 text-xs font-medium">
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Tentang Kami</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Visi & Misi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">artikel</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Rumah Sakit</h4>
+                <ul class="space-y-3 text-xs font-medium">
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Tentang Kami</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Visi & Misi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Manajemen</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Karir</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Pasien & Pengunjung</h4>
+                <ul class="space-y-3 text-xs font-medium">
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kebijakan Privasi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Syarat & Ketentuan</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Prosedur Keluhan</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kontak IGD</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Hubungi Kami</h4>
+                <div class="space-y-3 text-xs font-medium text-gray-300">
+                    <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-[#6bfe9c]">phone</span> (021) 899-722-22</p>
+                    <p class="flex items-center gap-2"><span class="material-symbols-outlined text-sm text-[#6bfe9c]">mail</span> info@medirossacikarang.com</p>
+                    <div class="mt-4">
+                        <p class="mb-2 text-gray-400 text-[11px]">Langganan Artikel Kesehatan:</p>
+                        <div class="flex max-w-xs bg-[#242926] rounded-lg p-1 border border-white/5">
+                            <input class="bg-transparent border-none text-white px-3 py-2 w-full text-xs focus:ring-0 outline-none placeholder-gray-500" placeholder="Email Anda" type="email">
+                            <button class="bg-[#005f48] text-white px-4 rounded-md hover:bg-[#004d3a] transition-colors text-xs font-bold">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-6 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-gray-500 font-medium">
+            <p>© 2024 RS Medirossa Cikarang. Member of Medirossa Hospital Group. Licensed Healthcare Provider.</p>
+        </div>
+    </footer>
+
+    <script>
+        let isCaptchaChecked = false;
+
+        function checkFormValidity() {
+            const fields = document.querySelectorAll('.req-field');
+            const captchaBox = document.getElementById('captcha-box');
+            const captchaCheckbox = document.getElementById('not-a-robot');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            let allFilled = true;
+            fields.forEach(field => {
+                if (field.value.trim() === "") {
+                    allFilled = false;
+                }
+            });
+
+            if (allFilled) {
+                // Nyalakan box reCAPTCHA tiruan jika form lengkap
+                captchaBox.classList.remove('opacity-40');
+                captchaCheckbox.removeAttribute('disabled');
+                captchaCheckbox.classList.remove('cursor-not-allowed');
+                captchaCheckbox.classList.add('cursor-pointer');
+            } else {
+                // Kunci kembali jika ada form terhapus kosong
+                captchaBox.classList.add('opacity-40');
+                captchaCheckbox.setAttribute('disabled', 'true');
+                captchaCheckbox.checked = false;
+                captchaCheckbox.classList.remove('cursor-pointer');
+                captchaCheckbox.classList.add('cursor-not-allowed');
+                
+                isCaptchaChecked = false;
+                submitBtn.setAttribute('disabled', 'true');
+                submitBtn.className = "w-full sm:w-fit bg-gray-400 text-white px-8 py-3 rounded-lg font-bold text-xs transition-all cursor-not-allowed shadow-sm";
+            }
+        }
+
+        function toggleRobotCheck() {
+            const captchaCheckbox = document.getElementById('not-a-robot');
+            const submitBtn = document.getElementById('submit-btn');
+            
+            if (captchaCheckbox.checked) {
+                isCaptchaChecked = true;
+                submitBtn.removeAttribute('disabled');
+                submitBtn.className = "w-full sm:w-fit bg-[#005f48] text-white px-8 py-3 rounded-lg font-bold text-xs hover:bg-[#004d3a] transition-all active:scale-95 cursor-pointer shadow-sm";
+            } else {
+                isCaptchaChecked = false;
+                submitBtn.setAttribute('disabled', 'true');
+                submitBtn.className = "w-full sm:w-fit bg-gray-400 text-white px-8 py-3 rounded-lg font-bold text-xs transition-all cursor-not-allowed shadow-sm";
+            }
+        }
+
+        function validateFormSubmit(event) {
+            event.preventDefault(); 
+            if (isCaptchaChecked) {
+                alert("Terima kasih! Pesan Anda berhasil terkirim ke RS Medirossa Cikarang.");
+                document.getElementById('contact-form').reset();
+                checkFormValidity(); 
+            }
+        }
+    </script>
+</body>
+</html>
