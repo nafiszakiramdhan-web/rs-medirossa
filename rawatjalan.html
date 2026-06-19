@@ -46,10 +46,13 @@
         }
     </script>
     <style>
+        /* Mengunci frame HP agar tidak bocor atau bisa digeser miring ke samping */
         html, body {
             margin: 0 !important;
             padding: 0 !important;
             box-sizing: border-box;
+            overflow-x: hidden !important;
+            width: 100%;
         }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
         .hover-card:hover { transform: translateY(-4px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.05); }
@@ -58,7 +61,7 @@
 </head>
 <body class="bg-surface font-sans min-h-screen flex flex-col justify-between m-0 p-0">
 
-    <nav class="fixed top-0 left-0 right-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
+    <nav class="fixed top-0 left-0 right-0 w-full z-40 bg-white/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
         <div class="max-w-container-max mx-auto w-full px-margin-mobile md:px-gutter flex justify-between items-center">
             
             <div class="flex items-center gap-3">
@@ -81,7 +84,7 @@
                     </div>
                 </div>
                 
-               <div class="relative group">
+                <div class="relative group">
                     <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
                         Informasi <span class="material-symbols-outlined">expand_more</span>
                     </button>
@@ -97,19 +100,80 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <a class="hidden md:flex items-center gap-2 bg-[#006d37] text-white px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90 text-xs" 
+                <a class="hidden md:flex items-center gap-2 bg-secondary text-on-secondary px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90 text-xs font-bold" 
                    href="daftar.html">
                     <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
                     DAFTAR BEROBAT ONLINE
                 </a>
-                <button class="md:hidden text-primary">
+                <button id="menu-btn" class="md:hidden text-primary focus:outline-none">
                     <span class="material-symbols-outlined text-3xl">menu</span>
                 </button>
             </div>
         </div>
     </nav>
 
-    <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-16 flex-1 w-full">
+    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
+
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[280px] bg-white z-50 shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out md:hidden font-inter">
+        
+        <div class="flex flex-col space-y-6 overflow-y-auto max-h-[85vh] pr-1">
+            <div class="flex justify-between items-center pb-4 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                    <img src="asset/logo.jpg" alt="Logo" class="w-8 h-8 rounded-full">
+                    <span class="font-montserrat font-bold text-sm text-primary">Menu Utama</span>
+                </div>
+                <button id="close-btn" class="text-gray-400 hover:text-error focus:outline-none">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-gray-700">
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="index.html">
+                    <span class="material-symbols-outlined text-lg">home</span> Home
+                </a>
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="tentang.html">
+                    <span class="material-symbols-outlined text-lg">person</span> Profile
+                </a>
+
+                <div class="flex flex-col">
+                    <button onclick="toggleAccordion('mobile-layanan', 'icon-layanan')" class="w-full py-2.5 px-3 bg-gray-50 rounded-xl flex justify-between items-center text-left focus:outline-none text-primary">
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">medical_services</span> Layanan & Fasilitas</span>
+                        <span id="icon-layanan" class="material-symbols-outlined text-lg transition-transform duration-200 rotate-180">expand_more</span>
+                    </button>
+                    <div id="mobile-layanan" class="flex flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50 rounded-xl mt-1">
+                        <a class="block py-2 text-xs text-primary font-bold" href="rawatjalan.html">Rawat Jalan</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="rawatinap.html">Rawat Inap</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="penunjangmedis.html">Penunjang Medis</a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <button onclick="toggleAccordion('mobile-info', 'icon-informasi')" class="w-full py-2.5 px-3 hover:bg-gray-50 rounded-xl flex justify-between items-center text-left focus:outline-none">
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">info</span> Informasi</span>
+                        <span id="icon-informasi" class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
+                    </button>
+                    <div id="mobile-info" class="hidden flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50 rounded-xl mt-1">
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="jadwaldokter.html">Jadwal Dokter</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="alurpelayan.html">Alur Pelayanan</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="kunjunganpasien.html">Data Kunjungan</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="datapenyakit.html">Data Penyakit</a>
+                    </div>
+                </div>
+
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="artikel.html">
+                    <span class="material-symbols-outlined text-lg">article</span> Articles
+                </a>
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100">
+            <a class="block bg-secondary text-white py-3 rounded-full text-center text-xs font-bold shadow-md" href="daftar.html">
+                DAFTAR BEROBAT ONLINE
+            </a>
+        </div>
+    </div>
+
+    <main class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-24 pb-16 flex-1 w-full max-w-full overflow-hidden">
         <nav class="flex mb-4 text-outline font-medium text-sm gap-2 items-center mt-6">
             <a class="hover:text-primary transition-colors" href="index.html">Beranda</a>
             <span class="material-symbols-outlined text-xs">chevron_right</span>
@@ -118,160 +182,160 @@
         
         <div class="flex flex-col gap-6 mb-10">
             <div>
-                <h1 class="font-montserrat text-3xl md:text-4xl font-bold text-primary-container mb-2">Layanan Poliklinik Rawat Jalan</h1>
-                <p class="text-outline text-sm md:text-base max-w-3xl">Pilih layanan spesialisasi medis kami untuk mendapatkan penanganan kesehatan terbaik dari tim dokter ahli kami.</p>
+                <h1 class="font-montserrat text-2xl md:text-4xl font-bold text-primary-container mb-2">Layanan Poliklinik Rawat Jalan</h1>
+                <p class="text-outline text-xs md:text-sm max-w-3xl font-medium">Pilih layanan spesialisasi medis kami untuk mendapatkan penanganan kesehatan terbaik dari tim dokter ahli kami.</p>
             </div>
             <div class="relative w-full max-w-2xl">
-                <div class="flex items-center bg-white border border-outline-variant rounded-xl px-4 py-3 search-focus shadow-sm transition-all">
-                    <span class="material-symbols-outlined text-outline mr-3">search</span>
-                    <input class="bg-transparent border-none focus:ring-0 w-full text-sm placeholder:text-outline/60 outline-none" id="clinicSearch" placeholder="Cari klinik atau nama spesialis..."/>
+                <div class="flex items-center bg-white border border-outline-variant rounded-xl px-4 py-2.5 search-focus shadow-sm transition-all">
+                    <span class="material-symbols-outlined text-outline mr-3 text-lg">search</span>
+                    <input class="bg-transparent border-none focus:ring-0 w-full text-xs placeholder:text-outline/60 outline-none" id="clinicSearch" placeholder="Cari klinik atau nama spesialis..."/>
                 </div>
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" id="clinicGrid">
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 w-full" id="clinicGrid">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">medical_services</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Umum</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Layanan kesehatan dasar dan konsultasi kesehatan menyeluruh.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Umum</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Layanan kesehatan dasar dan konsultasi kesehatan menyeluruh.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">child_care</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Anak</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Pemeriksaan tumbuh kembang dan pengobatan penyakit pada anak.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Anak</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Pemeriksaan tumbuh kembang dan pengobatan penyakit pada anak.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">stethoscope</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Penyakit Dalam</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Penanganan medis organ dalam dan penyakit kronis orang dewasa.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Penyakit Dalam</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Penanganan medis organ dalam dan penyakit kronis orang dewasa.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">pregnant_woman</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Kandungan</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Kesehatan reproduksi wanita, kehamilan, hingga pasca melahirkan.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Kandungan</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Kesehatan reproduksi wanita, kehamilan, hingga pasca melahirkan.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">content_cut</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Bedah Umum</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Tindakan bedah terencana maupun darurat untuk berbagai kondisi.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Bedah Umum</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Tindakan bedah terencana maupun darurat untuk berbagai kondisi.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">water_drop</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Bedah Urologi</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Penanganan gangguan saluran kemih dan sistem reproduksi pria.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Bedah Urologi</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Penanganan gangguan saluran kemih dan sistem reproduksi pria.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">visibility</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Mata</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Pemeriksaan fungsi penglihatan dan pengobatan penyakit mata.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Mata</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Pemeriksaan fungsi penglihatan dan pengobatan penyakit mata.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">psychology</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Saraf</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Diagnosis dan terapi gangguan sistem saraf pusat dan tepi.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Saraf</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Diagnosis dan terapi gangguan sistem saraf pusat dan tepi.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">dentistry</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik Gigi</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Perawatan kesehatan gigi, gusi, dan mulut secara komprehensif.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik Gigi</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Perawatan kesehatan gigi, gusi, dan mulut secara komprehensif.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border border-outline-variant rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group shadow-sm">
                 <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
                     <span class="material-symbols-outlined text-primary text-2xl">hearing</span>
                 </div>
-                <h3 class="text-lg font-bold text-primary-container mb-2 font-montserrat">Klinik THT</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Pemeriksaan telinga, hidung, dan tenggorokan yang berkualitas.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline">
+                <h3 class="text-base font-bold text-primary-container mb-2 font-montserrat">Klinik THT</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Pemeriksaan telinga, hidung, dan tenggorokan yang berkualitas.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-primary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
 
-            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border-2 border-tertiary/20 rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group relative overflow-hidden">
+            <div onclick="window.location.href='jadwaldokter.html'" class="clinic-card bg-white border-2 border-tertiary/20 rounded-xl p-6 flex flex-col hover-card transition-all cursor-pointer group relative overflow-hidden shadow-sm">
                 <div class="absolute top-4 right-4 bg-tertiary/10 text-tertiary px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border border-tertiary/20">
                     Layanan 24 Jam
                 </div>
                 <div class="w-12 h-12 bg-tertiary/10 rounded-lg flex items-center justify-center mb-5 group-hover:bg-tertiary/20 transition-colors">
                     <span class="material-symbols-outlined text-tertiary text-2xl">emergency</span>
                 </div>
-                <h3 class="text-lg font-bold text-tertiary mb-2 font-montserrat">IGD</h3>
-                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed">Instalasi Gawat Darurat yang sigap melayani kondisi medis darurat Anda.</p>
-                <a href="jadwaldokter.html" class="flex items-center text-tertiary font-bold text-sm hover:underline">
+                <h3 class="text-base font-bold text-tertiary mb-2 font-montserrat">IGD</h3>
+                <p class="text-xs text-outline flex-grow mb-6 leading-relaxed font-medium">Instalasi Gawat Darurat yang sigap melayani kondisi medis darurat Anda.</p>
+                <a href="jadwaldokter.html" class="flex items-center text-tertiary font-bold text-xs hover:underline mt-auto">
                     Lihat Detail &amp; Jadwal <span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
             </div>
         </div>
 
-        <section class="mt-20 relative rounded-2xl overflow-hidden bg-primary-container p-8 md:p-12 flex flex-col md:flex-row items-center justify-between text-white shadow-md">
+        <section class="mt-20 relative rounded-2xl overflow-hidden bg-primary-container p-8 md:p-12 flex flex-col md:flex-row items-center justify-between text-white shadow-md w-full">
             <div class="z-10 relative mb-8 md:mb-0 md:max-w-2xl">
-                <h2 class="font-montserrat text-2xl md:text-3xl font-bold text-white mb-3">Pendaftaran Online Lebih Praktis</h2>
-                <p class="text-white/80 text-sm md:text-base mb-8 font-medium">Dapatkan kemudahan mendaftar rawat jalan tanpa antre panjang melalui portal pendaftaran online kami.</p>
-                <div class="flex flex-wrap gap-4 text-xs font-bold">
-                    <a href="daftar.html" class="bg-white text-primary px-6 py-3.5 rounded-xl shadow-md hover:bg-surface transition-colors">Daftar Sekarang</a>
-                    <a href="alurpelayan.html" class="border border-white/40 text-white px-6 py-3.5 rounded-xl hover:bg-white/10 transition-colors">Panduan Pasien</a>
+                <h2 class="font-montserrat text-xl md:text-3xl font-bold text-white mb-2">Pendaftaran Online Lebih Praktis</h2>
+                <p class="text-white/80 text-xs md:text-sm mb-8 font-medium leading-relaxed">Dapatkan kemudahan mendaftar rawat jalan tanpa antre panjang melalui portal pendaftaran online kami.</p>
+                <div class="flex flex-wrap gap-3 text-xs font-bold">
+                    <a href="daftar.html" class="bg-white text-primary px-5 py-3 rounded-xl shadow-sm hover:bg-surface transition-colors">Daftar Sekarang</a>
+                    <a href="alurpelayan.html" class="border border-white/40 text-white px-5 py-3 rounded-xl hover:bg-white/10 transition-colors">Panduan Pasien</a>
                 </div>
             </div>
-            <div class="z-10 relative">
+            <div class="z-10 relative w-full sm:w-auto">
                 <div class="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-xl flex items-center gap-4">
-                    <div class="bg-white/20 p-2.5 rounded-full flex-shrink-0">
-                        <span class="material-symbols-outlined text-white">call</span>
+                    <div class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
+                        <span class="material-symbols-outlined text-white text-lg">call</span>
                     </div>
                     <div>
-                        <p class="text-[10px] text-white/70 font-semibold uppercase tracking-wider">Call Center 24 Jam</p>
-                        <p class="text-xl md:text-2xl font-bold tracking-wide">(021) 899-722-22</p>
+                        <p class="text-[9px] text-white/70 font-semibold uppercase tracking-wider">Call Center 24 Jam</p>
+                        <p class="text-lg md:text-xl font-bold tracking-wide">(021) 899-722-22</p>
                     </div>
                 </div>
             </div>
@@ -281,23 +345,23 @@
         </section>
     </main>
 
-    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
+    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter overflow-hidden">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg w-full">
             
             <div class="md:col-span-1 space-y-4">
                 <div class="flex items-center gap-3">
                     <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-white/20 flex-shrink-0">
-                    <span class="font-montserrat text-lg font-bold text-white tracking-wide">RS Medirossa Cikarang</span>
+                    <span class="font-montserrat text-base font-bold text-white tracking-wide">RS Medirossa Cikarang</span>
                 </div>
                 <p class="text-xs text-gray-400 opacity-90 leading-relaxed">Bagian dari Medirossa Hospital Group, berkomitmen untuk memberikan layanan kesehatan berkualitas tinggi bagi masyarakat Indonesia.</p>
             </div>
             
-             <div>
+            <div>
                 <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Rumah Sakit</h4>
                 <ul class="space-y-3 text-xs font-medium">
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Tentang Kami</a></li>
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Visi & Misi</a></li>
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">artikel</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Visi & Misi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">Articles</a></li>
                 </ul>
             </div>
             
@@ -332,21 +396,80 @@
         </div>
     </footer>
 
+    <a class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-error text-white rounded-full shadow-2xl flex items-center justify-center z-[100] animate-bounce" href="tel:082261107834">
+        <span class="material-symbols-outlined text-2xl">call</span>
+    </a>
+
     <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        // Fungsi Membuka Sidebar (Meluncur Halus dari Samping Kanan)
+        if (menuBtn && mobileMenu && overlay) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; 
+            });
+        }
+
+        // Fungsi Menutup Sidebar (Geser Kembali ke Luar Kanan Screen)
+        function closeSidebar() {
+            mobileMenu.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = ''; 
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+        if (overlay) overlay.addEventListener('click', closeSidebar);
+
+        // Fungsi Buka-Tutup Submenu Cabang (Accordion)
+        function toggleAccordion(panelId, iconId) {
+            const panel = document.getElementById(panelId);
+            const icon = document.getElementById(iconId);
+            
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                panel.classList.add('flex');
+                if(icon) icon.classList.add('rotate-180');
+            } else {
+                panel.classList.remove('flex');
+                panel.classList.add('hidden');
+                if(icon) icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Logika Live Search Filter Grid Poliklinik
         const searchInput = document.getElementById('clinicSearch');
         const cards = document.querySelectorAll('.clinic-card');
 
-        searchInput.addEventListener('input', (e) => {
-            const term = e.target.value.toLowerCase();
-            cards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const desc = card.querySelector('p').textContent.toLowerCase();
-                if (title.includes(term) || desc.includes(term)) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+                    if (title.includes(term) || desc.includes(term)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
+        }
+
+        // Sticky Compression Navigation Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (nav && window.scrollY > 50) {
+                nav.classList.add('shadow-md', 'h-16');
+                nav.classList.remove('h-20');
+            } else if (nav) {
+                nav.classList.remove('shadow-md', 'h-16');
+                nav.classList.add('h-20');
+            }
         });
     </script>
 </body>
