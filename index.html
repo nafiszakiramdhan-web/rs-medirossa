@@ -101,6 +101,14 @@
         }
     </script>
     <style>
+        /* Mencegah scroll kanan yang merusak frame HP */
+        html, body {
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box;
+            overflow-x: hidden !important;
+            width: 100%2;
+        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             vertical-align: middle;
@@ -114,7 +122,7 @@
         }
     </style>
 </head>
-<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col justify-between m-0 p-0 overflow-x-hidden">
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col justify-between m-0 p-0">
     
     <nav class="fixed top-0 left-0 right-0 w-full z-40 bg-white/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
         <div class="max-w-container-max mx-auto w-full px-margin-mobile md:px-gutter flex justify-between items-center">
@@ -163,15 +171,15 @@
         </div>
     </nav>
 
-    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
+    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
 
-    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[300px] bg-white z-50 shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out md:hidden font-inter">
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[280px] bg-white z-50 shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out md:hidden font-inter">
         
-        <div class="flex flex-col space-y-6 overflow-y-auto max-h-[80vh] pr-1">
+        <div class="flex flex-col space-y-6 overflow-y-auto max-h-[85vh] pr-1">
             <div class="flex justify-between items-center pb-4 border-b border-gray-100">
                 <div class="flex items-center gap-2">
                     <img src="asset/logo.jpg" alt="Logo" class="w-8 h-8 rounded-full">
-                    <span class="font-montserrat font-bold text-sm text-primary">Menu Navigasi</span>
+                    <span class="font-montserrat font-bold text-sm text-primary">Menu Utama</span>
                 </div>
                 <button id="close-btn" class="text-gray-400 hover:text-error focus:outline-none">
                     <span class="material-symbols-outlined text-2xl">close</span>
@@ -191,7 +199,7 @@
                         <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">medical_services</span> Layanan & Fasilitas</span>
                         <span id="icon-layanan" class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
                     </button>
-                    <div id="mobile-layanan" class="hidden flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50/70 rounded-xl mt-1">
+                    <div id="mobile-layanan" class="hidden flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50 rounded-xl mt-1">
                         <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="rawatjalan.html">Rawat Jalan</a>
                         <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="rawatinap.html">Rawat Inap</a>
                         <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="penunjangmedis.html">Penunjang Medis</a>
@@ -200,10 +208,10 @@
 
                 <div class="flex flex-col">
                     <button onclick="toggleAccordion('mobile-info', 'icon-informasi')" class="w-full py-2.5 px-3 hover:bg-gray-50 rounded-xl flex justify-between items-center text-left focus:outline-none">
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">info</span> Informasi Rumah Sakit</span>
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">info</span> Informasi</span>
                         <span id="icon-informasi" class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
                     </button>
-                    <div id="mobile-info" class="hidden flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50/70 rounded-xl mt-1">
+                    <div id="mobile-info" class="hidden flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50 rounded-xl mt-1">
                         <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="jadwaldokter.html">Jadwal Dokter</a>
                         <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="alurpelayan.html">Alur Pelayanan</a>
                         <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="kunjunganpasien.html">Data Kunjungan</a>
@@ -218,7 +226,7 @@
         </div>
 
         <div class="pt-4 border-t border-gray-100">
-            <a class="block bg-secondary text-white py-3 rounded-full text-center text-xs font-bold shadow-md hover:opacity-95" href="daftar.html">
+            <a class="block bg-secondary text-white py-3 rounded-full text-center text-xs font-bold shadow-md" href="daftar.html">
                 DAFTAR BEROBAT ONLINE
             </a>
         </div>
@@ -248,12 +256,12 @@
         </div>
     </header>
 
-    <section class="relative z-30 -mt-20 px-margin-mobile md:px-gutter max-w-container-max mx-auto mb-mb-section-padding">
-        <div class="bg-surface-container-lowest shadow-xl rounded-3xl p-6 md:p-8 border border-outline-variant/30 flex flex-col justify-between gap-6">
+    <section class="relative z-30 -mt-20 px-margin-mobile md:px-gutter max-w-container-max mx-auto mb-mb-section-padding overflow-hidden">
+        <div class="bg-surface-container-lowest shadow-xl rounded-3xl p-6 md:p-8 border border-outline-variant/30 flex flex-col justify-between gap-6 max-w-full overflow-hidden">
             
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 max-w-full">
                 <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-xl flex items-center justify-center">
+                    <div class="w-12 h-12 bg-primary-container text-on-primary-container rounded-xl flex items-center justify-center flex-shrink-0">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
                     </div>
                     <div>
@@ -261,12 +269,12 @@
                         <p class="text-on-surface-variant font-caption text-xs font-medium">Pilih hari untuk melihat ketersediaan spesialis kami</p>
                     </div>
                 </div>
-                <div class="flex overflow-x-auto pb-2 md:pb-0 gap-2 scrollbar-hide" id="day-selector">
+                <div class="flex overflow-x-auto pb-2 md:pb-0 gap-2 max-w-full" id="day-selector" style="-webkit-overflow-scrolling: touch;">
                     <button class="px-5 py-2.5 rounded-full font-label-bold text-xs transition-all whitespace-nowrap bg-primary text-on-primary font-bold shadow-sm">Senin</button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter" id="doctor-results">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter w-full">
                 
                 <div class="bg-white rounded-2xl p-5 border border-outline-variant hover:border-primary/40 transition-colors flex flex-col justify-between shadow-sm">
                     <div class="flex items-center gap-4 mb-4">
@@ -372,8 +380,8 @@
         </div>
     </section>
 
-    <section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg">
+    <section class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-stack-lg w-full">
             <div class="bg-primary/5 rounded-3xl p-8 md:p-10 border border-primary/20 relative overflow-hidden group flex flex-col justify-between">
                 <div class="relative z-10 space-y-4">
                     <div class="bg-white w-36 h-12 rounded-xl shadow-sm flex items-center justify-center p-2 border border-gray-100">
@@ -389,12 +397,12 @@
                 <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"></div>
             </div>
             
-            <div class="space-y-4">
+            <div class="space-y-4 max-w-full overflow-hidden">
                 <div class="flex items-center justify-between mb-2">
                     <h2 class="font-montserrat font-bold text-lg text-on-surface">Tarif Kamar Rawat Inap</h2>
                     <a class="text-primary text-xs font-bold hover:underline" href="rawatinap.html">Semua Detail</a>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                     <div class="p-5 rounded-2xl border border-gray-100 hover:border-secondary transition-all group hover:bg-secondary-container/5 shadow-sm">
                         <div class="flex justify-between items-start mb-3">
                             <span class="bg-[#00743a] text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">Terbaik</span>
@@ -427,7 +435,7 @@
         </div>
     </section>
 
-    <section class="bg-gray-50 py-16">
+    <section class="bg-gray-50 py-16 overflow-hidden">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
             <div class="text-center mb-12">
                 <span class="text-primary font-bold tracking-widest text-xs uppercase">Layanan Unggulan</span>
@@ -435,7 +443,7 @@
                 <div class="w-16 h-1 bg-primary mx-auto mt-3 rounded-full"></div>
             </div>
             
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12 w-full">
                 <div class="group bg-white rounded-2xl shadow-sm hover:shadow-md border border-gray-100 hover:border-error/10 transition-all flex flex-col overflow-hidden">
                     <div class="aspect-[4/3] overflow-hidden bg-gray-100">
                         <img src="asset/rs.png" alt="UGD / IGD 24 Jam" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
@@ -501,16 +509,16 @@
         </div>
     </section>
 
-    <section class="bg-white py-16">
+    <section class="bg-white py-16 overflow-hidden">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center w-full">
                 <div class="w-full aspect-video md:aspect-square bg-gray-100 rounded-3xl overflow-hidden shadow-sm relative group border-4 border-gray-50">
                     <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('asset/map.png');"></div>
                     <div class="absolute inset-0 bg-black/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                         <span class="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-xl text-xs font-bold text-primary shadow">Klik untuk Perbesar Peta</span>
                     </div>
                 </div>
-                <div class="space-y-6 lg:pl-6">
+                <div class="space-y-6 lg:pl-6 max-w-full">
                     <div class="space-y-3">
                         <span class="text-secondary font-bold tracking-widest text-xs uppercase">Lokasi Strategis</span>
                         <h2 class="font-montserrat font-bold text-2xl md:text-3xl text-on-surface">Kunjungi Kami di Cikarang</h2>
@@ -538,8 +546,8 @@
         </div>
     </section>
 
-    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
+    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter overflow-hidden">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg w-full">
             <div class="md:col-span-1 space-y-4">
                 <div class="flex items-center gap-3">
                     <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-white/20 flex-shrink-0">
@@ -558,7 +566,7 @@
             <div>
                 <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Pasien & Pengunjung</h4>
                 <ul class="space-y-3 text-xs font-medium">
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kebijakan Privasi</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kebijalan Privasi</a></li>
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Syarat & Ketentuan</a></li>
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Prosedur Keluhan</a></li>
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Kontak IGD</a></li>
@@ -594,26 +602,26 @@
         const mobileMenu = document.getElementById('mobile-menu');
         const overlay = document.getElementById('sidebar-overlay');
 
-        // Fungsi Buka Sidebar (Geser Masuk dari Kanan)
+        // Fungsi Membuka Sidebar (Meluncur Halus dari Samping Kanan)
         if (menuBtn && mobileMenu && overlay) {
             menuBtn.addEventListener('click', () => {
                 mobileMenu.classList.remove('translate-x-full');
                 overlay.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Kunci scroll halaman utama
+                document.body.style.overflow = 'hidden'; // Mengunci layar agar tidak goyang saat menu aktif
             });
         }
 
-        // Fungsi Tutup Sidebar (Geser Keluar ke Kanan)
+        // Fungsi Menutup Sidebar (Geser Kembali ke Luar Kanan Screen)
         function closeSidebar() {
             mobileMenu.classList.add('translate-x-full');
             overlay.classList.add('hidden');
-            document.body.style.overflow = ''; // Aktifkan scroll kembali
+            document.body.style.overflow = ''; // Mengaktifkan kembali scroll halaman
         }
 
         if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
         if (overlay) overlay.addEventListener('click', closeSidebar);
 
-        // Fungsi Accordion Klik Sub-Menu (Buka Beranak)
+        // Fungsi Buka-Tutup Submenu Cabang (Accordion)
         function toggleAccordion(panelId, iconId) {
             const panel = document.getElementById(panelId);
             const icon = document.getElementById(iconId);
@@ -629,7 +637,7 @@
             }
         }
 
-        // Calendar Logic
+        // Calendar Generator Engine
         const days = ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         const selector = document.getElementById('day-selector');
         
@@ -653,7 +661,7 @@
             }
         });
 
-        // Sticky Navbar Effect
+        // Sticky Compression Navigation Scroll Effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (nav && window.scrollY > 50) {
