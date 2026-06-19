@@ -102,10 +102,13 @@
         }
     </script>
     <style>
+        /* Mengunci frame HP agar tidak bocor atau bisa digeser miring ke samping */
         html, body {
             margin: 0 !important;
             padding: 0 !important;
             box-sizing: border-box;
+            overflow-x: hidden !important;
+            width: 100%;
         }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -121,7 +124,7 @@
 </head>
 <body class="bg-background font-body-md text-on-surface min-h-screen flex flex-col justify-between m-0 p-0">
 
-    <nav class="fixed top-0 left-0 right-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
+    <nav class="fixed top-0 left-0 right-0 w-full z-40 bg-white/80 backdrop-blur-xl shadow-sm h-20 flex items-center">
         <div class="max-w-container-max mx-auto w-full px-margin-mobile md:px-gutter flex justify-between items-center">
             
             <div class="flex items-center gap-3">
@@ -129,7 +132,7 @@
                 <span class="font-montserrat font-bold text-lg text-primary">RS Medirossa Cikarang</span>
             </div>
             
-            <div class="hidden lg:flex items-center gap-stack-lg text-sm font-semibold">
+            <div class="hidden md:flex items-center gap-stack-lg text-sm font-semibold">
                 <a class="text-on-surface-variant hover:text-primary transition-colors" href="index.html">Home</a>
                 <a class="text-on-surface-variant hover:text-primary transition-colors" href="tentang.html">Profile</a>
                 
@@ -144,7 +147,7 @@
                     </div>
                 </div>
                 
-              <div class="relative group">
+                <div class="relative group">
                     <button class="flex items-center gap-1 text-on-surface-variant hover:text-primary transition-colors">
                         Informasi <span class="material-symbols-outlined">expand_more</span>
                     </button>
@@ -152,7 +155,7 @@
                         <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="jadwaldokter.html">Jadwal Dokter</a>
                         <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="alurpelayan.html">Alur Pelayanan</a>
                         <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="kunjunganpasien.html">Data Kunjungan</a>
-                        <a class="block px-4 py-2 hover:bg-primary/5 text-on-surface-variant" href="datapenyakit.html">Data Penyakit</a>
+                        <a class="text-primary border-b-2 border-primary pb-1" href="datapenyakit.html">Data Penyakit</a>
                     </div>
                 </div>
                 
@@ -160,17 +163,78 @@
             </div>
             
             <div class="flex items-center gap-4">
-                <a class="hidden md:flex items-center gap-2 bg-[#006d37] text-white px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90 text-xs" 
+                <a class="hidden md:flex items-center gap-2 bg-secondary text-on-secondary px-6 py-3 rounded-full font-label-bold text-label-bold hover:scale-95 transition-all shadow-md active:opacity-90 text-xs font-bold" 
                    href="daftar.html">
                     <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
                     DAFTAR BEROBAT ONLINE
                 </a>
-                <button class="md:hidden text-primary">
+                <button id="menu-btn" class="md:hidden text-primary focus:outline-none">
                     <span class="material-symbols-outlined text-3xl">menu</span>
                 </button>
             </div>
         </div>
     </nav>
+
+    <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"></div>
+
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-[280px] bg-white z-50 shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out md:hidden font-inter">
+        
+        <div class="flex flex-col space-y-6 overflow-y-auto max-h-[85vh] pr-1">
+            <div class="flex justify-between items-center pb-4 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                    <img src="asset/logo.jpg" alt="Logo" class="w-8 h-8 rounded-full">
+                    <span class="font-montserrat font-bold text-sm text-primary">Menu Utama</span>
+                </div>
+                <button id="close-btn" class="text-gray-400 hover:text-error focus:outline-none">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+
+            <div class="flex flex-col space-y-2 text-sm font-semibold text-gray-700">
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="index.html">
+                    <span class="material-symbols-outlined text-lg">home</span> Home
+                </a>
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="tentang.html">
+                    <span class="material-symbols-outlined text-lg">person</span> Profile
+                </a>
+
+                <div class="flex flex-col">
+                    <button onclick="toggleAccordion('mobile-layanan', 'icon-layanan')" class="w-full py-2.5 px-3 hover:bg-gray-50 rounded-xl flex justify-between items-center text-left focus:outline-none">
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">medical_services</span> Layanan & Fasilitas</span>
+                        <span id="icon-layanan" class="material-symbols-outlined text-lg transition-transform duration-200">expand_more</span>
+                    </button>
+                    <div id="mobile-layanan" class="hidden flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50 rounded-xl mt-1">
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="rawatjalan.html">Rawat Jalan</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="rawatinap.html">Rawat Inap</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="penunjangmedis.html">Penunjang Medis</a>
+                    </div>
+                </div>
+
+                <div class="flex flex-col">
+                    <button onclick="toggleAccordion('mobile-info', 'icon-informasi')" class="w-full py-2.5 px-3 bg-gray-50 rounded-xl flex justify-between items-center text-left focus:outline-none text-primary">
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-lg">info</span> Informasi</span>
+                        <span id="icon-informasi" class="material-symbols-outlined text-lg transition-transform duration-200 rotate-180">expand_more</span>
+                    </button>
+                    <div id="mobile-info" class="flex flex-col pl-9 pr-3 py-1 space-y-2 bg-gray-50 rounded-xl mt-1">
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="jadwaldokter.html">Jadwal Dokter</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="alurpelayan.html">Alur Pelayanan</a>
+                        <a class="block py-2 text-xs text-gray-600 hover:text-primary font-medium" href="kunjunganpasien.html">Data Kunjungan</a>
+                        <a class="block py-2 text-xs text-primary font-bold" href="datapenyakit.html">Data Penyakit</a>
+                    </div>
+                </div>
+
+                <a class="py-2.5 px-3 hover:bg-gray-50 rounded-xl flex items-center gap-2" href="artikel.html">
+                    <span class="material-symbols-outlined text-lg">article</span> Articles
+                </a>
+            </div>
+        </div>
+
+        <div class="pt-4 border-t border-gray-100">
+            <a class="block bg-secondary text-white py-3 rounded-full text-center text-xs font-bold shadow-md" href="daftar.html">
+                DAFTAR BEROBAT ONLINE
+            </a>
+        </div>
+    </div>
 
     <main class="pt-24 pb-16 px-margin-mobile md:px-gutter max-w-container-max mx-auto w-full flex-grow">
         
@@ -223,7 +287,7 @@
             </div>
         </section>
 
-        <section class="mb-stack-lg">
+        <section class="mb-stack-lg max-w-full overflow-hidden">
             <div class="bg-white p-6 md:p-8 rounded-2xl border border-gray-100 shadow-sm">
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                     <h2 class="font-montserrat text-base md:text-lg font-bold text-on-surface">Top 6 Penyakit Paling Dominan</h2>
@@ -292,17 +356,17 @@
             </div>
         </section>
 
-        <section class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <section class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden max-w-full">
             <div class="p-6 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-gray-50/40">
                 <h2 class="font-montserrat text-base font-bold text-on-surface">Tabel Detail Frekuensi Distribusi Penyakit</h2>
                 <div class="text-[11px] font-semibold text-on-surface-variant bg-gray-100 px-3 py-1 rounded-md">Update terakhir: 24 Mei 2024</div>
             </div>
             
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse text-xs md:text-sm">
+                <table class="w-full text-left border-collapse text-xs md:text-sm whitespace-nowrap">
                     <thead>
                         <tr class="bg-gray-50/70 text-on-surface-variant font-bold border-b border-gray-100 text-[11px] md:text-xs uppercase tracking-wider">
-                            <th class="py-3.5 px-6 w-20">Peringkat</th>
+                            <th class="py-3.5 px-6 w-20 text-center">Peringkat</th>
                             <th class="py-3.5 px-6">Nama Penyakit (ICD-10)</th>
                             <th class="py-3.5 px-6 text-right">Jumlah Kasus</th>
                             <th class="py-3.5 px-6 text-right">Persentase</th>
@@ -387,16 +451,15 @@
         </section>
     </main>
 
-    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg">
+    <footer class="bg-[#181d1a] text-gray-300 w-full font-inter overflow-hidden">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-12 grid grid-cols-1 md:grid-cols-4 gap-stack-lg w-full">
             
-             <div>
-                <h4 class="text-xs font-bold uppercase mb-4 text-[#6bfe9c] tracking-wider">Rumah Sakit</h4>
-                <ul class="space-y-3 text-xs font-medium">
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Tentang Kami</a></li>
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Visi & Misi</a></li>
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">artikel</a></li>
-                </ul>
+            <div class="md:col-span-1 space-y-4">
+                <div class="flex items-center gap-3">
+                    <img src="asset/logo.jpg" alt="Logo RS Medirossa Cikarang" class="w-10 h-10 rounded-full object-cover border border-white/20 flex-shrink-0">
+                    <span class="font-montserrat text-base font-bold text-white tracking-wide">RS Medirossa Cikarang</span>
+                </div>
+                <p class="text-xs text-gray-400 opacity-90 leading-relaxed">Bagian dari Medirossa Hospital Group, berkomitmen untuk memberikan layanan kesehatan berkualitas tinggi bagi masyarakat Indonesia.</p>
             </div>
             
             <div>
@@ -404,8 +467,7 @@
                 <ul class="space-y-3 text-xs font-medium">
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="tentang.html">Tentang Kami</a></li>
                     <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Visi & Misi</a></li>
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Manajemen</a></li>
-                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="#">Karir</a></li>
+                    <li><a class="text-gray-300 hover:text-[#6bfe9c] hover:underline underline-offset-4 transition-all" href="artikel.html">Articles</a></li>
                 </ul>
             </div>
             
@@ -440,5 +502,62 @@
         </div>
     </footer>
 
+    <a class="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-error text-white rounded-full shadow-2xl flex items-center justify-center z-[100] animate-bounce" href="tel:082261107834">
+        <span class="material-symbols-outlined text-2xl">call</span>
+    </a>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const overlay = document.getElementById('sidebar-overlay');
+
+        // Fungsi Membuka Sidebar (Meluncur Halus dari Samping Kanan)
+        if (menuBtn && mobileMenu && overlay) {
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+                document.body.style.overflow = 'hidden'; 
+            });
+        }
+
+        // Fungsi Menutup Sidebar (Geser Kembali ke Luar Kanan Screen)
+        function closeSidebar() {
+            mobileMenu.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = ''; 
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+        if (overlay) overlay.addEventListener('click', closeSidebar);
+
+        // Fungsi Buka-Tutup Submenu Cabang (Accordion)
+        function toggleAccordion(panelId, iconId) {
+            const panel = document.getElementById(panelId);
+            const icon = document.getElementById(iconId);
+            
+            if (panel.classList.contains('hidden')) {
+                panel.classList.remove('hidden');
+                panel.classList.add('flex');
+                if(icon) icon.classList.add('rotate-180');
+            } else {
+                panel.classList.remove('flex');
+                panel.classList.add('hidden');
+                if(icon) icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Sticky Compression Navigation Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (nav && window.scrollY > 50) {
+                nav.classList.add('shadow-md', 'h-16');
+                nav.classList.remove('h-20');
+            } else if (nav) {
+                nav.classList.remove('shadow-md', 'h-16');
+                nav.classList.add('h-20');
+            }
+        });
+    </script>
 </body>
 </html>
